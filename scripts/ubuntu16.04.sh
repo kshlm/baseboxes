@@ -67,7 +67,7 @@ case "$PACKER_BUILDER_TYPE" in
 
         vmware-iso)
 		# Install prerequisite.
-		apt-get --no-install-recommends -y install fuse perl
+		apt-get --no-install-recommends -y install fuse
 
 		# Mount the ISO.
 		mount -o loop,ro /dev/shm/linux.iso /mnt
@@ -95,12 +95,6 @@ case "$PACKER_BUILDER_TYPE" in
 
 		# Remove the distribution.
 		rm -r /tmp/vmware-tools-distrib
-
-		# Ensure VMware Tools start up correctly.
-		for r in 2 3 4 5; do
-			ln -s ../init.d/vmware-tools /etc/rc$r.d/S01vmware-tools
-		done
-		ln -s ../init.d/vmware-tools /etc/rc1.d/K01vmware-tools
 		;;
 esac
 
