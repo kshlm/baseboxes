@@ -7,7 +7,7 @@
         "atlas_version": "{{isotime \"2006\"}}.{{isotime \"01\"}}.{{isotime \"02\"}}",
         "headless": "true",
         "iso_sha256sum_32": "736f2c5700313494a2282092ca0f8b0048883ed48c5fdcf585d6e1852a3a110f",
-        "iso_sha256sum_64": "29a8b9009509b39d542ecb229787cdf48f05e739a932289de9e9858d7c487c80",
+        "iso_sha256sum_64": "737ae7041212c628de5751d15c3016058b0e833fdc32e7420209b76ca3d0a535",
         "iso_url_32": "http://releases.ubuntu.com/16.04.2/ubuntu-16.04.2-server-i386.iso",
         "iso_url_64": "http://releases.ubuntu.com/16.04.2/ubuntu-16.04.2-server-amd64.iso",
         "parallels_tools_version": null, 
