@@ -2,18 +2,66 @@
     "variables": {
         "atlas_token": null,
         "atlas_name_32": "Arch Linux 2017.02.01",
-        "atlas_name_64": "Arch Linux 2017.03.01",
+        "atlas_name_64": "Arch Linux 2017.04.01",
         "atlas_short_description": "Arch Linux",
         "atlas_username": null,
         "atlas_version": "{{isotime \"2006\"}}.{{isotime \"01\"}}.{{isotime \"02\"}}",
         "headless": "true",
         "iso_sha256sum_32": "4d9d67b1a20a3b44b0dd38679400971a68d5bd9f96608bd13a677d84b8a7ece5",
-        "iso_sha256sum_64": "4133a852f0b753133c600ebc4f0e1b393e6810cee7a8766a1c239a6dac9b7095",
+        "iso_sha256sum_64": "02e1c8b1be161545e7321e07d842aa8e49118f49089d3331bf459ff58b08fd1c",
         "iso_url_32": "http://mirrors.kernel.org/archlinux/iso/2017.02.01/archlinux-2017.02.01-dual.iso",
-        "iso_url_64": "http://mirrors.kernel.org/archlinux/iso/2017.03.01/archlinux-2017.03.01-dual.iso",
+        "iso_url_64": "http://mirrors.kernel.org/archlinux/iso/2017.04.01/archlinux-2017.04.01-x86_64.iso",
         "parallels_tools_version": null
     },
     "builders": [
+        {
+            "type": "qemu",
+            "name": "archlinux-32-libvirt",
+            "ssh_username": "root",
+            "ssh_password": "packer",
+            "accelerator": "kvm",
+            "boot_command": [
+                "<down><enter><wait10><wait10><wait10>hostname archlinux-32 && ",
+                "curl -O http://{{.HTTPIP}}:{{.HTTPPort}}/install.sh && bash install.sh<enter>"
+            ],
+            "boot_wait": "5s",
+            "disk_size": 49152,
+            "headless": "{{user `headless`}}",
+            "http_directory": "http/archlinux",
+            "iso_checksum": "{{user `iso_sha256sum_32`}}",
+            "iso_checksum_type": "sha256",
+            "iso_url": "{{user `iso_url_32`}}",
+            "machine_type": "q35",
+            "qemuargs": [
+                [ "-m", "512" ]
+            ],
+            "shutdown_command": "halt -p",
+            "vm_name": "archlinux-32"
+        },
+        {
+            "type": "qemu",
+            "name": "archlinux-64-libvirt",
+            "ssh_username": "root",
+            "ssh_password": "packer",
+            "accelerator": "kvm",
+            "boot_command": [
+                "<enter><wait10><wait10><wait10>hostname archlinux-64 && ",
+                "curl -O http://{{.HTTPIP}}:{{.HTTPPort}}/install.sh && bash install.sh<enter>"
+            ],
+            "boot_wait": "5s",
+            "disk_size": 49152,
+            "headless": "{{user `headless`}}",
+            "http_directory": "http/archlinux",
+            "iso_checksum": "{{user `iso_sha256sum_64`}}",
+            "iso_checksum_type": "sha256",
+            "iso_url": "{{user `iso_url_64`}}",
+            "machine_type": "q35",
+            "qemuargs": [
+                [ "-m", "512" ]
+            ],
+            "shutdown_command": "halt -p",
+            "vm_name": "archlinux-64"
+        },
         {
             "type": "parallels-iso",
             "name": "archlinux-32-parallels",
@@ -70,54 +118,6 @@
                 [ "set", "{{.Name}}", "--device-del", "sound0" ],
                 [ "set", "{{.Name}}", "--device-del", "usb" ],
                 [ "set", "{{.Name}}", "--videosize", "2" ]
-            ],
-            "shutdown_command": "halt -p",
-            "vm_name": "archlinux-64"
-        },
-        {
-            "type": "qemu",
-            "name": "archlinux-32-libvirt",
-            "ssh_username": "root",
-            "ssh_password": "packer",
-            "accelerator": "kvm",
-            "boot_command": [
-                "<down><enter><wait10><wait10><wait10>hostname archlinux-32 && ",
-                "curl -O http://{{.HTTPIP}}:{{.HTTPPort}}/install.sh && bash install.sh<enter>"
-            ],
-            "boot_wait": "5s",
-            "disk_size": 49152,
-            "headless": "{{user `headless`}}",
-            "http_directory": "http/archlinux",
-            "iso_checksum": "{{user `iso_sha256sum_32`}}",
-            "iso_checksum_type": "sha256",
-            "iso_url": "{{user `iso_url_32`}}",
-            "machine_type": "q35",
-            "qemuargs": [
-                [ "-m", "512" ]
-            ],
-            "shutdown_command": "halt -p",
-            "vm_name": "archlinux-32"
-        },
-        {
-            "type": "qemu",
-            "name": "archlinux-64-libvirt",
-            "ssh_username": "root",
-            "ssh_password": "packer",
-            "accelerator": "kvm",
-            "boot_command": [
-                "<enter><wait10><wait10><wait10>hostname archlinux-64 && ",
-                "curl -O http://{{.HTTPIP}}:{{.HTTPPort}}/install.sh && bash install.sh<enter>"
-            ],
-            "boot_wait": "5s",
-            "disk_size": 49152,
-            "headless": "{{user `headless`}}",
-            "http_directory": "http/archlinux",
-            "iso_checksum": "{{user `iso_sha256sum_64`}}",
-            "iso_checksum_type": "sha256",
-            "iso_url": "{{user `iso_url_64`}}",
-            "machine_type": "q35",
-            "qemuargs": [
-                [ "-m", "512" ]
             ],
             "shutdown_command": "halt -p",
             "vm_name": "archlinux-64"
