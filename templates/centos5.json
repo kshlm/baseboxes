@@ -6,15 +6,59 @@
         "atlas_username": null,
         "atlas_version": "{{isotime \"2006\"}}.{{isotime \"01\"}}.{{isotime \"02\"}}",
         "headless": "true",
-        "iso_sha256sum_32": "ad9d977982474a04026753f83df0d3b8269abb9ab7ec511940d84ac0ce7a1047",
-        "iso_sha256sum_64": "9729c04a8a3ba57ed4e34ee5b96522879e6a3bcbf5582c3b6bcfd02bcfbacf8c",
-        "iso_url_32": "http://mirrors.kernel.org/centos/5.11/isos/i386/CentOS-5.11-i386-netinstall.iso",
-        "iso_url_64": "http://mirrors.kernel.org/centos/5.11/isos/x86_64/CentOS-5.11-x86_64-netinstall.iso",
+        "iso_sha256sum_url_32": "http://archive.kernel.org/centos-vault/5.11/isos/i386/sha256sum.txt",
+        "iso_sha256sum_url_64": "http://archive.kernel.org/centos-vault/5.11/isos/x86_64/sha256sum.txt",
+        "iso_url_32": "http://archive.kernel.org/centos-vault/5.11/isos/i386/CentOS-5.11-i386-netinstall.iso",
+        "iso_url_64": "http://archive.kernel.org/centos-vault/5.11/isos/x86_64/CentOS-5.11-x86_64-netinstall.iso",
         "parallels_tools_version": null,
         "virtualbox_additions_version": null,
         "vmware_tools_version": null
     },
     "builders": [
+        {
+            "type": "qemu",
+            "name": "centos5-32-libvirt",
+            "ssh_username": "root",
+            "ssh_password": "packer",
+            "ssh_timeout": "10m",
+            "accelerator": "kvm",
+            "boot_command": "text hostname=centos5-32 ks=http://{{.HTTPIP}}:{{.HTTPPort}}/libvirt-32.cfg<enter><wait>",
+            "boot_wait": "5s",
+            "disk_size": 49152,
+            "headless": "{{user `headless`}}",
+            "http_directory": "http/centos5",
+            "iso_checksum_url": "{{user `iso_sha256sum_url_32`}}",
+            "iso_checksum_type": "sha256",
+            "iso_url": "{{user `iso_url_32`}}",
+            "machine_type": "q35",
+            "qemuargs": [
+                [ "-m", "512" ]
+            ],
+            "shutdown_command": "halt -p",
+            "vm_name": "centos5-32"
+        },
+        {
+            "type": "qemu",
+            "name": "centos5-64-libvirt",
+            "ssh_username": "root",
+            "ssh_password": "packer",
+            "ssh_timeout": "10m",
+            "accelerator": "kvm",
+            "boot_command": "text hostname=centos5-64 ks=http://{{.HTTPIP}}:{{.HTTPPort}}/libvirt-64.cfg<enter><wait>",
+            "boot_wait": "5s",
+            "disk_size": 49152,
+            "headless": "{{user `headless`}}",
+            "http_directory": "http/centos5",
+            "iso_checksum_url": "{{user `iso_sha256sum_url_64`}}",
+            "iso_checksum_type": "sha256",
+            "iso_url": "{{user `iso_url_64`}}",
+            "machine_type": "q35",
+            "qemuargs": [
+                [ "-m", "512" ]
+            ],
+            "shutdown_command": "halt -p",
+            "vm_name": "centos5-64"
+        },
         {
             "type": "parallels-iso",
             "name": "centos5-32-parallels",
@@ -27,7 +71,7 @@
             "guest_os_type": "centos",
             "hard_drive_interface": "sata",
             "http_directory": "http/centos5",
-            "iso_checksum": "{{user `iso_sha256sum_32`}}",
+            "iso_checksum_url": "{{user `iso_sha256sum_url_32`}}",
             "iso_checksum_type": "sha256",
             "iso_url": "{{user `iso_url_32`}}",
             "parallels_tools_flavor": "lin",
@@ -55,7 +99,7 @@
             "guest_os_type": "centos",
             "hard_drive_interface": "sata",
             "http_directory": "http/centos5",
-            "iso_checksum": "{{user `iso_sha256sum_64`}}",
+            "iso_checksum_url": "{{user `iso_sha256sum_url_64`}}",
             "iso_checksum_type": "sha256",
             "iso_url": "{{user `iso_url_64`}}",
             "parallels_tools_flavor": "lin",
@@ -67,50 +111,6 @@
                 [ "set", "{{.Name}}", "--device-del", "sound0" ],
                 [ "set", "{{.Name}}", "--device-del", "usb" ],
                 [ "set", "{{.Name}}", "--videosize", "2" ]
-            ],
-            "shutdown_command": "halt -p",
-            "vm_name": "centos5-64"
-        },
-        {
-            "type": "qemu",
-            "name": "centos5-32-libvirt",
-            "ssh_username": "root",
-            "ssh_password": "packer",
-            "ssh_timeout": "10m",
-            "accelerator": "kvm",
-            "boot_command": "text hostname=centos5-32 ks=http://{{.HTTPIP}}:{{.HTTPPort}}/libvirt-32.cfg<enter><wait>",
-            "boot_wait": "5s",
-            "disk_size": 49152,
-            "headless": "{{user `headless`}}",
-            "http_directory": "http/centos5",
-            "iso_checksum": "{{user `iso_sha256sum_32`}}",
-            "iso_checksum_type": "sha256",
-            "iso_url": "{{user `iso_url_32`}}",
-            "machine_type": "q35",
-            "qemuargs": [
-                [ "-m", "512" ]
-            ],
-            "shutdown_command": "halt -p",
-            "vm_name": "centos5-32"
-        },
-        {
-            "type": "qemu",
-            "name": "centos5-64-libvirt",
-            "ssh_username": "root",
-            "ssh_password": "packer",
-            "ssh_timeout": "10m",
-            "accelerator": "kvm",
-            "boot_command": "text hostname=centos5-64 ks=http://{{.HTTPIP}}:{{.HTTPPort}}/libvirt-64.cfg<enter><wait>",
-            "boot_wait": "5s",
-            "disk_size": 49152,
-            "headless": "{{user `headless`}}",
-            "http_directory": "http/centos5",
-            "iso_checksum": "{{user `iso_sha256sum_64`}}",
-            "iso_checksum_type": "sha256",
-            "iso_url": "{{user `iso_url_64`}}",
-            "machine_type": "q35",
-            "qemuargs": [
-                [ "-m", "512" ]
             ],
             "shutdown_command": "halt -p",
             "vm_name": "centos5-64"
@@ -129,7 +129,7 @@
             "hard_drive_interface": "sata",
             "headless": "{{user `headless`}}",
             "http_directory": "http/centos5",
-            "iso_checksum": "{{user `iso_sha256sum_32`}}",
+            "iso_checksum_url": "{{user `iso_sha256sum_url_32`}}",
             "iso_checksum_type": "sha256",
             "iso_url": "{{user `iso_url_32`}}",
             "shutdown_command": "halt -p",
@@ -159,7 +159,7 @@
             "hard_drive_interface": "sata",
             "headless": "{{user `headless`}}",
             "http_directory": "http/centos5",
-            "iso_checksum": "{{user `iso_sha256sum_64`}}",
+            "iso_checksum_url": "{{user `iso_sha256sum_url_64`}}",
             "iso_checksum_type": "sha256",
             "iso_url": "{{user `iso_url_64`}}",
             "shutdown_command": "halt -p",
@@ -188,7 +188,7 @@
             "guest_os_type": "rhel5",
             "headless": "{{user `headless`}}",
             "http_directory": "http/centos5",
-            "iso_checksum": "{{user `iso_sha256sum_32`}}",
+            "iso_checksum_url": "{{user `iso_sha256sum_url_32`}}",
             "iso_checksum_type": "sha256",
             "iso_url": "{{user `iso_url_32`}}",
             "shutdown_command": "halt -p",
@@ -218,7 +218,7 @@
             "guest_os_type": "rhel5-64",
             "headless": "{{user `headless`}}",
             "http_directory": "http/centos5",
-            "iso_checksum": "{{user `iso_sha256sum_64`}}",
+            "iso_checksum_url": "{{user `iso_sha256sum_url_64`}}",
             "iso_checksum_type": "sha256",
             "iso_url": "{{user `iso_url_64`}}",
             "shutdown_command": "halt -p",
@@ -267,7 +267,7 @@
                 "artifact": "{{user `atlas_username`}}/centos5-32",
                 "artifact_type": "vagrant.box",
                 "metadata": {
-                    "description": "{{user `atlas_name`}} (i386)\n\nCore installation with guest extensions:\n- Parallels Tools {{user `parallels_tools_version`}}\n- VirtualBox Guest Additions {{user `virtualbox_additions_version`}}\n- VMware Tools {{user `vmware_tools_version`}}\n\nPackages are current as of {{isotime \"2006-01-02\"}}.\n\nhttps://github.com/wholebits/baseboxes",
+                    "description": "{{user `atlas_name`}} (i386)\n\nCore installation with guest extensions:\n- Parallels Tools {{user `parallels_tools_version`}}\n- VirtualBox Guest Additions {{user `virtualbox_additions_version`}}\n- VMware Tools {{user `vmware_tools_version`}}\n\nhttps://github.com/wholebits/baseboxes",
                     "provider": "parallels",
                     "short_description": "{{user `atlas_short_description`}} (i386)",
                     "version": "{{user `atlas_version`}}"
@@ -280,7 +280,7 @@
                 "artifact": "{{user `atlas_username`}}/centos5-64",
                 "artifact_type": "vagrant.box",
                 "metadata": {
-                    "description": "{{user `atlas_name`}} (x86_64)\n\nCore installation with guest extensions:\n- Parallels Tools {{user `parallels_tools_version`}}\n- VirtualBox Guest Additions {{user `virtualbox_additions_version`}}\n- VMware Tools {{user `vmware_tools_version`}}\n\nPackages are current as of {{isotime \"2006-01-02\"}}.\n\nhttps://github.com/wholebits/baseboxes",
+                    "description": "{{user `atlas_name`}} (x86_64)\n\nCore installation with guest extensions:\n- Parallels Tools {{user `parallels_tools_version`}}\n- VirtualBox Guest Additions {{user `virtualbox_additions_version`}}\n- VMware Tools {{user `vmware_tools_version`}}\n\nhttps://github.com/wholebits/baseboxes",
                     "provider": "parallels",
                     "short_description": "{{user `atlas_short_description`}} (x86_64)",
                     "version": "{{user `atlas_version`}}"
@@ -293,7 +293,7 @@
                 "artifact": "{{user `atlas_username`}}/centos5-32",
                 "artifact_type": "vagrant.box",
                 "metadata": {
-                    "description": "{{user `atlas_name`}} (i386)\n\nCore installation with guest extensions:\n- Parallels Tools {{user `parallels_tools_version`}}\n- VirtualBox Guest Additions {{user `virtualbox_additions_version`}}\n- VMware Tools {{user `vmware_tools_version`}}\n\nPackages are current as of {{isotime \"2006-01-02\"}}.\n\nhttps://github.com/wholebits/baseboxes",
+                    "description": "{{user `atlas_name`}} (i386)\n\nCore installation with guest extensions:\n- Parallels Tools {{user `parallels_tools_version`}}\n- VirtualBox Guest Additions {{user `virtualbox_additions_version`}}\n- VMware Tools {{user `vmware_tools_version`}}\n\nhttps://github.com/wholebits/baseboxes",
                     "provider": "libvirt",
                     "short_description": "{{user `atlas_short_description`}} (i386)",
                     "version": "{{user `atlas_version`}}"
@@ -306,7 +306,7 @@
                 "artifact": "{{user `atlas_username`}}/centos5-64",
                 "artifact_type": "vagrant.box",
                 "metadata": {
-                    "description": "{{user `atlas_name`}} (x86_64)\n\nCore installation with guest extensions:\n- Parallels Tools {{user `parallels_tools_version`}}\n- VirtualBox Guest Additions {{user `virtualbox_additions_version`}}\n- VMware Tools {{user `vmware_tools_version`}}\n\nPackages are current as of {{isotime \"2006-01-02\"}}.\n\nhttps://github.com/wholebits/baseboxes",
+                    "description": "{{user `atlas_name`}} (x86_64)\n\nCore installation with guest extensions:\n- Parallels Tools {{user `parallels_tools_version`}}\n- VirtualBox Guest Additions {{user `virtualbox_additions_version`}}\n- VMware Tools {{user `vmware_tools_version`}}\n\nhttps://github.com/wholebits/baseboxes",
                     "provider": "libvirt",
                     "short_description": "{{user `atlas_short_description`}} (x86_64)",
                     "version": "{{user `atlas_version`}}"
@@ -319,7 +319,7 @@
                 "artifact": "{{user `atlas_username`}}/centos5-32",
                 "artifact_type": "vagrant.box",
                 "metadata": {
-                    "description": "{{user `atlas_name`}} (i386)\n\nCore installation with guest extensions:\n- Parallels Tools {{user `parallels_tools_version`}}\n- VirtualBox Guest Additions {{user `virtualbox_additions_version`}}\n- VMware Tools {{user `vmware_tools_version`}}\n\nPackages are current as of {{isotime \"2006-01-02\"}}.\n\nhttps://github.com/wholebits/baseboxes",
+                    "description": "{{user `atlas_name`}} (i386)\n\nCore installation with guest extensions:\n- Parallels Tools {{user `parallels_tools_version`}}\n- VirtualBox Guest Additions {{user `virtualbox_additions_version`}}\n- VMware Tools {{user `vmware_tools_version`}}\n\nhttps://github.com/wholebits/baseboxes",
                     "provider": "virtualbox",
                     "short_description": "{{user `atlas_short_description`}} (i386)",
                     "version": "{{user `atlas_version`}}"
@@ -332,7 +332,7 @@
                 "artifact": "{{user `atlas_username`}}/centos5-64",
                 "artifact_type": "vagrant.box",
                 "metadata": {
-                    "description": "{{user `atlas_name`}} (x86_64)\n\nCore installation with guest extensions:\n- Parallels Tools {{user `parallels_tools_version`}}\n- VirtualBox Guest Additions {{user `virtualbox_additions_version`}}\n- VMware Tools {{user `vmware_tools_version`}}\n\nPackages are current as of {{isotime \"2006-01-02\"}}.\n\nhttps://github.com/wholebits/baseboxes",
+                    "description": "{{user `atlas_name`}} (x86_64)\n\nCore installation with guest extensions:\n- Parallels Tools {{user `parallels_tools_version`}}\n- VirtualBox Guest Additions {{user `virtualbox_additions_version`}}\n- VMware Tools {{user `vmware_tools_version`}}\n\nhttps://github.com/wholebits/baseboxes",
                     "provider": "virtualbox",
                     "short_description": "{{user `atlas_short_description`}} (x86_64)",
                     "version": "{{user `atlas_version`}}"
@@ -345,7 +345,7 @@
                 "artifact": "{{user `atlas_username`}}/centos5-32",
                 "artifact_type": "vagrant.box",
                 "metadata": {
-                    "description": "{{user `atlas_name`}} (i386)\n\nCore installation with guest extensions:\n- Parallels Tools {{user `parallels_tools_version`}}\n- VirtualBox Guest Additions {{user `virtualbox_additions_version`}}\n- VMware Tools {{user `vmware_tools_version`}}\n\nPackages are current as of {{isotime \"2006-01-02\"}}.\n\nhttps://github.com/wholebits/baseboxes",
+                    "description": "{{user `atlas_name`}} (i386)\n\nCore installation with guest extensions:\n- Parallels Tools {{user `parallels_tools_version`}}\n- VirtualBox Guest Additions {{user `virtualbox_additions_version`}}\n- VMware Tools {{user `vmware_tools_version`}}\n\nhttps://github.com/wholebits/baseboxes",
                     "provider": "vmware_desktop",
                     "short_description": "{{user `atlas_short_description`}} (i386)",
                     "version": "{{user `atlas_version`}}"
@@ -358,7 +358,7 @@
                 "artifact": "{{user `atlas_username`}}/centos5-64",
                 "artifact_type": "vagrant.box",
                 "metadata": {
-                    "description": "{{user `atlas_name`}} (x86_64)\n\nCore installation with guest extensions:\n- Parallels Tools {{user `parallels_tools_version`}}\n- VirtualBox Guest Additions {{user `virtualbox_additions_version`}}\n- VMware Tools {{user `vmware_tools_version`}}\n\nPackages are current as of {{isotime \"2006-01-02\"}}.\n\nhttps://github.com/wholebits/baseboxes",
+                    "description": "{{user `atlas_name`}} (x86_64)\n\nCore installation with guest extensions:\n- Parallels Tools {{user `parallels_tools_version`}}\n- VirtualBox Guest Additions {{user `virtualbox_additions_version`}}\n- VMware Tools {{user `vmware_tools_version`}}\n\nhttps://github.com/wholebits/baseboxes",
                     "provider": "vmware_desktop",
                     "short_description": "{{user `atlas_short_description`}} (x86_64)",
                     "version": "{{user `atlas_version`}}"
