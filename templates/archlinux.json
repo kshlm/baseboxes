@@ -12,7 +12,8 @@
         "iso_url_32": "http://mirrors.kernel.org/archlinux/iso/2017.02.01/archlinux-2017.02.01-dual.iso",
         "iso_url_64": "http://mirrors.kernel.org/archlinux/iso/2017.04.01/archlinux-2017.04.01-x86_64.iso",
         "open_vm_tools_version": null,
-        "parallels_tools_version": null
+        "parallels_tools_version": null,
+        "virtualbox_additions_version": null
     },
     "builders": [
         {
