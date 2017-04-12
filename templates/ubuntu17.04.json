@@ -6,8 +6,7 @@
         "atlas_username": null,
         "atlas_version": "{{isotime \"2006\"}}.{{isotime \"01\"}}.{{isotime \"02\"}}",
         "headless": "true",
-        "iso_sha256sum_32": "3e5b00fdbc7de714d3383ba6bb099090945a45858604bbbb0f45821c793006e9",
-        "iso_sha256sum_64": "b1f8ac25fe82ec892f3469a4eceb52b9b81573ba265fbbf531446fc2e2a54d0d",
+        "iso_sha256sum_url": "http://releases.ubuntu.com/17.04/SHA256SUMS",
         "iso_url_32": "http://releases.ubuntu.com/17.04/ubuntu-17.04-beta2-server-i386.iso",
         "iso_url_64": "http://releases.ubuntu.com/17.04/ubuntu-17.04-beta2-server-amd64.iso",
         "parallels_tools_version": null,
@@ -31,8 +30,8 @@
             "disk_size": 49152,
             "headless": "{{user `headless`}}",
             "http_directory": "http/ubuntu17.04",
-            "iso_checksum": "{{user `iso_sha256sum_32`}}",
             "iso_checksum_type": "sha256",
+            "iso_checksum_url": "{{user `iso_sha256sum_url`}}",
             "iso_url": "{{user `iso_url_32`}}",
             "machine_type": "q35",
             "qemuargs": [
@@ -58,8 +57,8 @@
             "disk_size": 49152,
             "headless": "{{user `headless`}}",
             "http_directory": "http/ubuntu17.04",
-            "iso_checksum": "{{user `iso_sha256sum_64`}}",
             "iso_checksum_type": "sha256",
+            "iso_checksum_url": "{{user `iso_sha256sum_url`}}",
             "iso_url": "{{user `iso_url_64`}}",
             "machine_type": "q35",
             "qemuargs": [
@@ -85,8 +84,8 @@
             "guest_os_type": "ubuntu",
             "hard_drive_interface": "sata",
             "http_directory": "http/ubuntu17.04",
-            "iso_checksum": "{{user `iso_sha256sum_32`}}",
             "iso_checksum_type": "sha256",
+            "iso_checksum_url": "{{user `iso_sha256sum_url`}}",
             "iso_url": "{{user `iso_url_32`}}",
             "parallels_tools_flavor": "lin",
             "parallels_tools_guest_path": "/dev/shm/prl-tools-{{.Flavor}}.iso",
@@ -118,8 +117,8 @@
             "guest_os_type": "ubuntu",
             "hard_drive_interface": "sata",
             "http_directory": "http/ubuntu17.04",
-            "iso_checksum": "{{user `iso_sha256sum_64`}}",
             "iso_checksum_type": "sha256",
+            "iso_checksum_url": "{{user `iso_sha256sum_url`}}",
             "iso_url": "{{user `iso_url_64`}}",
             "parallels_tools_flavor": "lin",
             "parallels_tools_guest_path": "/dev/shm/prl-tools-{{.Flavor}}.iso",
@@ -153,8 +152,8 @@
             "hard_drive_interface": "sata",
             "headless": "{{user `headless`}}",
             "http_directory": "http/ubuntu17.04",
-            "iso_checksum": "{{user `iso_sha256sum_32`}}",
             "iso_checksum_type": "sha256",
+            "iso_checksum_url": "{{user `iso_sha256sum_url`}}",
             "iso_url": "{{user `iso_url_32`}}",
             "shutdown_command": "halt -p",
             "vboxmanage": [
@@ -188,8 +187,8 @@
             "hard_drive_interface": "sata",
             "headless": "{{user `headless`}}",
             "http_directory": "http/ubuntu17.04",
-            "iso_checksum": "{{user `iso_sha256sum_64`}}",
             "iso_checksum_type": "sha256",
+            "iso_checksum_url": "{{user `iso_sha256sum_url`}}",
             "iso_url": "{{user `iso_url_64`}}",
             "shutdown_command": "halt -p",
             "vboxmanage": [
@@ -222,8 +221,8 @@
             "guest_os_type": "ubuntu",
             "headless": "{{user `headless`}}",
             "http_directory": "http/ubuntu17.04",
-            "iso_checksum": "{{user `iso_sha256sum_32`}}",
             "iso_checksum_type": "sha256",
+            "iso_checksum_url": "{{user `iso_sha256sum_url`}}",
             "iso_url": "{{user `iso_url_32`}}",
             "shutdown_command": "halt -p",
             "tools_upload_flavor": "linux",
@@ -257,8 +256,8 @@
             "guest_os_type": "ubuntu-64",
             "headless": "{{user `headless`}}",
             "http_directory": "http/ubuntu17.04",
-            "iso_checksum": "{{user `iso_sha256sum_64`}}",
             "iso_checksum_type": "sha256",
+            "iso_checksum_url": "{{user `iso_sha256sum_url`}}",
             "iso_url": "{{user `iso_url_64`}}",
             "shutdown_command": "halt -p",
             "tools_upload_flavor": "linux",
@@ -299,32 +298,6 @@
             },
             {
                 "type": "atlas",
-                "only": [ "ubuntu17.04-32-parallels" ],
-                "token": "{{user `atlas_token`}}",
-                "artifact": "{{user `atlas_username`}}/ubuntu17.04-32",
-                "artifact_type": "vagrant.box",
-                "metadata": {
-                    "description": "{{user `atlas_name`}} (i386)\n\nMinimal installation with guest extensions:\n- Parallels Tools {{user `parallels_tools_version`}}\n- VirtualBox Guest Additions {{user `virtualbox_additions_version`}}\n- VMware Tools {{user `vmware_tools_version`}}\n\nPackages are current as of {{isotime \"2006-01-02\"}}.\n\nhttps://github.com/wholebits/baseboxes",
-                    "provider": "parallels",
-                    "short_description": "{{user `atlas_short_description`}} (i386)",
-                    "version": "{{user `atlas_version`}}"
-                }
-            },
-            {
-                "type": "atlas",
-                "only": [ "ubuntu17.04-64-parallels" ],
-                "token": "{{user `atlas_token`}}",
-                "artifact": "{{user `atlas_username`}}/ubuntu17.04-64",
-                "artifact_type": "vagrant.box",
-                "metadata": {
-                    "description": "{{user `atlas_name`}} (amd64)\n\nMinimal installation with guest extensions:\n- Parallels Tools {{user `parallels_tools_version`}}\n- VirtualBox Guest Additions {{user `virtualbox_additions_version`}}\n- VMware Tools {{user `vmware_tools_version`}}\n\nPackages are current as of {{isotime \"2006-01-02\"}}.\n\nhttps://github.com/wholebits/baseboxes",
-                    "provider": "parallels",
-                    "short_description": "{{user `atlas_short_description`}} (amd64)",
-                    "version": "{{user `atlas_version`}}"
-                }
-            },
-            {
-                "type": "atlas",
                 "only": [ "ubuntu17.04-32-libvirt" ],
                 "token": "{{user `atlas_token`}}",
                 "artifact": "{{user `atlas_username`}}/ubuntu17.04-32",
@@ -345,6 +318,32 @@
                 "metadata": {
                     "description": "{{user `atlas_name`}} (amd64)\n\nMinimal installation with guest extensions:\n- Parallels Tools {{user `parallels_tools_version`}}\n- VirtualBox Guest Additions {{user `virtualbox_additions_version`}}\n- VMware Tools {{user `vmware_tools_version`}}\n\nPackages are current as of {{isotime \"2006-01-02\"}}.\n\nhttps://github.com/wholebits/baseboxes",
                     "provider": "libvirt",
+                    "short_description": "{{user `atlas_short_description`}} (amd64)",
+                    "version": "{{user `atlas_version`}}"
+                }
+            },
+            {
+                "type": "atlas",
+                "only": [ "ubuntu17.04-32-parallels" ],
+                "token": "{{user `atlas_token`}}",
+                "artifact": "{{user `atlas_username`}}/ubuntu17.04-32",
+                "artifact_type": "vagrant.box",
+                "metadata": {
+                    "description": "{{user `atlas_name`}} (i386)\n\nMinimal installation with guest extensions:\n- Parallels Tools {{user `parallels_tools_version`}}\n- VirtualBox Guest Additions {{user `virtualbox_additions_version`}}\n- VMware Tools {{user `vmware_tools_version`}}\n\nPackages are current as of {{isotime \"2006-01-02\"}}.\n\nhttps://github.com/wholebits/baseboxes",
+                    "provider": "parallels",
+                    "short_description": "{{user `atlas_short_description`}} (i386)",
+                    "version": "{{user `atlas_version`}}"
+                }
+            },
+            {
+                "type": "atlas",
+                "only": [ "ubuntu17.04-64-parallels" ],
+                "token": "{{user `atlas_token`}}",
+                "artifact": "{{user `atlas_username`}}/ubuntu17.04-64",
+                "artifact_type": "vagrant.box",
+                "metadata": {
+                    "description": "{{user `atlas_name`}} (amd64)\n\nMinimal installation with guest extensions:\n- Parallels Tools {{user `parallels_tools_version`}}\n- VirtualBox Guest Additions {{user `virtualbox_additions_version`}}\n- VMware Tools {{user `vmware_tools_version`}}\n\nPackages are current as of {{isotime \"2006-01-02\"}}.\n\nhttps://github.com/wholebits/baseboxes",
+                    "provider": "parallels",
                     "short_description": "{{user `atlas_short_description`}} (amd64)",
                     "version": "{{user `atlas_version`}}"
                 }

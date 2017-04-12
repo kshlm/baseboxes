@@ -270,32 +270,6 @@
             },
             {
                 "type": "atlas",
-                "only": [ "archlinux-32-parallels" ],
-                "token": "{{user `atlas_token`}}",
-                "artifact": "{{user `atlas_username`}}/archlinux-32",
-                "artifact_type": "vagrant.box",
-                "metadata": {
-                    "description": "{{user `atlas_name_32`}} (i686)\n\nMinimal installation with guest extensions:\n- Parallels Tools {{user `parallels_tools_version`}}\n- VirtualBox Guest Additions {{user `virtualbox_additions_version`}}\n- Open-VM-Tools {{user `vmware_tools_version`}}\n\nPackages are current as of {{isotime \"2006-01-02\"}}.\n\nhttps://github.com/wholebits/baseboxes",
-                    "provider": "parallels",
-                    "short_description": "{{user `atlas_short_description`}} (i686)",
-                    "version": "{{user `atlas_version`}}"
-                }
-            },
-            {
-                "type": "atlas",
-                "only": [ "archlinux-64-parallels" ],
-                "token": "{{user `atlas_token`}}",
-                "artifact": "{{user `atlas_username`}}/archlinux-64",
-                "artifact_type": "vagrant.box",
-                "metadata": {
-                    "description": "{{user `atlas_name_64`}} (x86_64)\n\nMinimal installation with guest extensions:\n- Parallels Tools {{user `parallels_tools_version`}}\n- VirtualBox Guest Additions {{user `virtualbox_additions_version`}}\n- Open-VM-Tools {{user `vmware_tools_version`}}\n\nPackages are current as of {{isotime \"2006-01-02\"}}.\n\nhttps://github.com/wholebits/baseboxes",
-                    "provider": "parallels",
-                    "short_description": "{{user `atlas_short_description`}} (x86_64)",
-                    "version": "{{user `atlas_version`}}"
-                }
-            },
-            {
-                "type": "atlas",
                 "only": [ "archlinux-32-libvirt" ],
                 "token": "{{user `atlas_token`}}",
                 "artifact": "{{user `atlas_username`}}/archlinux-32",
@@ -316,6 +290,32 @@
                 "metadata": {
                     "description": "{{user `atlas_name_64`}} (x86_64)\n\nMinimal installation with guest extensions:\n- Parallels Tools {{user `parallels_tools_version`}}\n- VirtualBox Guest Additions {{user `virtualbox_additions_version`}}\n- Open-VM-Tools {{user `vmware_tools_version`}}\n\nPackages are current as of {{isotime \"2006-01-02\"}}.\n\nhttps://github.com/wholebits/baseboxes",
                     "provider": "libvirt",
+                    "short_description": "{{user `atlas_short_description`}} (x86_64)",
+                    "version": "{{user `atlas_version`}}"
+                }
+            },
+            {
+                "type": "atlas",
+                "only": [ "archlinux-32-parallels" ],
+                "token": "{{user `atlas_token`}}",
+                "artifact": "{{user `atlas_username`}}/archlinux-32",
+                "artifact_type": "vagrant.box",
+                "metadata": {
+                    "description": "{{user `atlas_name_32`}} (i686)\n\nMinimal installation with guest extensions:\n- Parallels Tools {{user `parallels_tools_version`}}\n- VirtualBox Guest Additions {{user `virtualbox_additions_version`}}\n- Open-VM-Tools {{user `vmware_tools_version`}}\n\nPackages are current as of {{isotime \"2006-01-02\"}}.\n\nhttps://github.com/wholebits/baseboxes",
+                    "provider": "parallels",
+                    "short_description": "{{user `atlas_short_description`}} (i686)",
+                    "version": "{{user `atlas_version`}}"
+                }
+            },
+            {
+                "type": "atlas",
+                "only": [ "archlinux-64-parallels" ],
+                "token": "{{user `atlas_token`}}",
+                "artifact": "{{user `atlas_username`}}/archlinux-64",
+                "artifact_type": "vagrant.box",
+                "metadata": {
+                    "description": "{{user `atlas_name_64`}} (x86_64)\n\nMinimal installation with guest extensions:\n- Parallels Tools {{user `parallels_tools_version`}}\n- VirtualBox Guest Additions {{user `virtualbox_additions_version`}}\n- Open-VM-Tools {{user `vmware_tools_version`}}\n\nPackages are current as of {{isotime \"2006-01-02\"}}.\n\nhttps://github.com/wholebits/baseboxes",
+                    "provider": "parallels",
                     "short_description": "{{user `atlas_short_description`}} (x86_64)",
                     "version": "{{user `atlas_version`}}"
                 }

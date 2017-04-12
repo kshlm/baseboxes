@@ -6,8 +6,7 @@
         "atlas_username": null,
         "atlas_version": "{{isotime \"2006\"}}.{{isotime \"01\"}}.{{isotime \"02\"}}",
         "headless": "true",
-        "iso_sha256sum_32": "6071b0844ecbb8aa9a246b15c7aa20e798d42ed5b41c1b71aaea1f4283985ba4",
-        "iso_sha256sum_64": "dde07d37647a1d2d9247e33f14e91acb10445a97578384896b4e1d985f754cc1",
+        "iso_sha256sum_url": "http://releases.ubuntu.com/14.04.5/SHA256SUMS",
         "iso_url_32": "http://releases.ubuntu.com/14.04.5/ubuntu-14.04.5-server-i386.iso",
         "iso_url_64": "http://releases.ubuntu.com/14.04.5/ubuntu-14.04.5-server-amd64.iso",
         "parallels_tools_version": null,
@@ -15,6 +14,58 @@
         "vmware_tools_version": null
     },
     "builders": [
+        {
+            "type": "qemu",
+            "name": "ubuntu14.04-32-libvirt",
+            "ssh_username": "root",
+            "ssh_password": "packer",
+            "ssh_timeout": "10m",
+            "accelerator": "kvm",
+            "boot_command": [
+                "<esc><esc><enter><wait>/install/vmlinuz initrd=/install/initrd.gz",
+                " auto-install/enable=true netcfg/get_hostname=ubuntu1404-32",
+                " preseed/url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/libvirt.cfg<enter>"
+            ],
+            "boot_wait": "5s",
+            "disk_size": 49152,
+            "headless": "{{user `headless`}}",
+            "http_directory": "http/ubuntu14.04",
+            "iso_checksum_type": "sha256",
+            "iso_checksum_url": "{{user `iso_sha256sum_url`}}",
+            "iso_url": "{{user `iso_url_32`}}",
+            "machine_type": "q35",
+            "qemuargs": [
+                [ "-m", "512" ]
+            ],
+            "shutdown_command": "halt -p",
+            "vm_name": "ubuntu14.04-32"
+        },
+        {
+            "type": "qemu",
+            "name": "ubuntu14.04-64-libvirt",
+            "ssh_username": "root",
+            "ssh_password": "packer",
+            "ssh_timeout": "10m",
+            "accelerator": "kvm",
+            "boot_command": [
+                "<esc><esc><enter><wait>/install/vmlinuz initrd=/install/initrd.gz",
+                " auto-install/enable=true netcfg/get_hostname=ubuntu1404-64",
+                " preseed/url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/libvirt.cfg<enter>"
+            ],
+            "boot_wait": "5s",
+            "disk_size": 49152,
+            "headless": "{{user `headless`}}",
+            "http_directory": "http/ubuntu14.04",
+            "iso_checksum_type": "sha256",
+            "iso_checksum_url": "{{user `iso_sha256sum_url`}}",
+            "iso_url": "{{user `iso_url_64`}}",
+            "machine_type": "q35",
+            "qemuargs": [
+                [ "-m", "512" ]
+            ],
+            "shutdown_command": "halt -p",
+            "vm_name": "ubuntu14.04-64"
+        },
         {
             "type": "parallels-iso",
             "name": "ubuntu14.04-32-parallels",
@@ -31,8 +82,8 @@
             "guest_os_type": "ubuntu",
             "hard_drive_interface": "sata",
             "http_directory": "http/ubuntu14.04",
-            "iso_checksum": "{{user `iso_sha256sum_32`}}",
             "iso_checksum_type": "sha256",
+            "iso_checksum_url": "{{user `iso_sha256sum_url`}}",
             "iso_url": "{{user `iso_url_32`}}",
             "parallels_tools_flavor": "lin",
             "parallels_tools_guest_path": "/dev/shm/prl-tools-{{.Flavor}}.iso",
@@ -63,8 +114,8 @@
             "guest_os_type": "ubuntu",
             "hard_drive_interface": "sata",
             "http_directory": "http/ubuntu14.04",
-            "iso_checksum": "{{user `iso_sha256sum_64`}}",
             "iso_checksum_type": "sha256",
+            "iso_checksum_url": "{{user `iso_sha256sum_url`}}",
             "iso_url": "{{user `iso_url_64`}}",
             "parallels_tools_flavor": "lin",
             "parallels_tools_guest_path": "/dev/shm/prl-tools-{{.Flavor}}.iso",
@@ -78,58 +129,6 @@
             ],
             "shutdown_command": "halt -p",
             "vm_name": "ubuntu1404-64"
-        },
-        {
-            "type": "qemu",
-            "name": "ubuntu14.04-32-libvirt",
-            "ssh_username": "root",
-            "ssh_password": "packer",
-            "ssh_timeout": "10m",
-            "accelerator": "kvm",
-            "boot_command": [
-                "<esc><esc><enter><wait>/install/vmlinuz initrd=/install/initrd.gz",
-                " auto-install/enable=true netcfg/get_hostname=ubuntu1404-32",
-                " preseed/url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/libvirt.cfg<enter>"
-            ],
-            "boot_wait": "5s",
-            "disk_size": 49152,
-            "headless": "{{user `headless`}}",
-            "http_directory": "http/ubuntu14.04",
-            "iso_checksum": "{{user `iso_sha256sum_32`}}",
-            "iso_checksum_type": "sha256",
-            "iso_url": "{{user `iso_url_32`}}",
-            "machine_type": "q35",
-            "qemuargs": [
-                [ "-m", "512" ]
-            ],
-            "shutdown_command": "halt -p",
-            "vm_name": "ubuntu14.04-32"
-        },
-        {
-            "type": "qemu",
-            "name": "ubuntu14.04-64-libvirt",
-            "ssh_username": "root",
-            "ssh_password": "packer",
-            "ssh_timeout": "10m",
-            "accelerator": "kvm",
-            "boot_command": [
-                "<esc><esc><enter><wait>/install/vmlinuz initrd=/install/initrd.gz",
-                " auto-install/enable=true netcfg/get_hostname=ubuntu1404-64",
-                " preseed/url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/libvirt.cfg<enter>"
-            ],
-            "boot_wait": "5s",
-            "disk_size": 49152,
-            "headless": "{{user `headless`}}",
-            "http_directory": "http/ubuntu14.04",
-            "iso_checksum": "{{user `iso_sha256sum_64`}}",
-            "iso_checksum_type": "sha256",
-            "iso_url": "{{user `iso_url_64`}}",
-            "machine_type": "q35",
-            "qemuargs": [
-                [ "-m", "512" ]
-            ],
-            "shutdown_command": "halt -p",
-            "vm_name": "ubuntu14.04-64"
         },
         {
             "type": "virtualbox-iso",
@@ -149,8 +148,8 @@
             "hard_drive_interface": "sata",
             "headless": "{{user `headless`}}",
             "http_directory": "http/ubuntu14.04",
-            "iso_checksum": "{{user `iso_sha256sum_32`}}",
             "iso_checksum_type": "sha256",
+            "iso_checksum_url": "{{user `iso_sha256sum_url`}}",
             "iso_url": "{{user `iso_url_32`}}",
             "shutdown_command": "halt -p",
             "vboxmanage": [
@@ -183,8 +182,8 @@
             "hard_drive_interface": "sata",
             "headless": "{{user `headless`}}",
             "http_directory": "http/ubuntu14.04",
-            "iso_checksum": "{{user `iso_sha256sum_64`}}",
             "iso_checksum_type": "sha256",
+            "iso_checksum_url": "{{user `iso_sha256sum_url`}}",
             "iso_url": "{{user `iso_url_64`}}",
             "shutdown_command": "halt -p",
             "vboxmanage": [
@@ -216,8 +215,8 @@
             "guest_os_type": "ubuntu",
             "headless": "{{user `headless`}}",
             "http_directory": "http/ubuntu14.04",
-            "iso_checksum": "{{user `iso_sha256sum_32`}}",
             "iso_checksum_type": "sha256",
+            "iso_checksum_url": "{{user `iso_sha256sum_url`}}",
             "iso_url": "{{user `iso_url_32`}}",
             "shutdown_command": "halt -p",
             "tools_upload_flavor": "linux",
@@ -250,8 +249,8 @@
             "guest_os_type": "ubuntu-64",
             "headless": "{{user `headless`}}",
             "http_directory": "http/ubuntu14.04",
-            "iso_checksum": "{{user `iso_sha256sum_64`}}",
             "iso_checksum_type": "sha256",
+            "iso_checksum_url": "{{user `iso_sha256sum_url`}}",
             "iso_url": "{{user `iso_url_64`}}",
             "shutdown_command": "halt -p",
             "tools_upload_flavor": "linux",
@@ -291,32 +290,6 @@
             },
             {
                 "type": "atlas",
-                "only": [ "ubuntu14.04-32-parallels" ],
-                "token": "{{user `atlas_token`}}",
-                "artifact": "{{user `atlas_username`}}/ubuntu14.04-32",
-                "artifact_type": "vagrant.box",
-                "metadata": {
-                    "description": "{{user `atlas_name`}} (i386)\n\nMinimal installation with guest extensions:\n- Parallels Tools {{user `parallels_tools_version`}}\n- VirtualBox Guest Additions {{user `virtualbox_additions_version`}}\n- VMware Tools {{user `vmware_tools_version`}}\n\nPackages are current as of {{isotime \"2006-01-02\"}}.\n\nhttps://github.com/wholebits/baseboxes",
-                    "provider": "parallels",
-                    "short_description": "{{user `atlas_short_description`}} (i386)",
-                    "version": "{{user `atlas_version`}}"
-                }
-            },
-            {
-                "type": "atlas",
-                "only": [ "ubuntu14.04-64-parallels" ],
-                "token": "{{user `atlas_token`}}",
-                "artifact": "{{user `atlas_username`}}/ubuntu14.04-64",
-                "artifact_type": "vagrant.box",
-                "metadata": {
-                    "description": "{{user `atlas_name`}} (amd64)\n\nMinimal installation with guest extensions:\n- Parallels Tools {{user `parallels_tools_version`}}\n- VirtualBox Guest Additions {{user `virtualbox_additions_version`}}\n- VMware Tools {{user `vmware_tools_version`}}\n\nPackages are current as of {{isotime \"2006-01-02\"}}.\n\nhttps://github.com/wholebits/baseboxes",
-                    "provider": "parallels",
-                    "short_description": "{{user `atlas_short_description`}} (amd64)",
-                    "version": "{{user `atlas_version`}}"
-                }
-            },
-            {
-                "type": "atlas",
                 "only": [ "ubuntu14.04-32-libvirt" ],
                 "token": "{{user `atlas_token`}}",
                 "artifact": "{{user `atlas_username`}}/ubuntu14.04-32",
@@ -337,6 +310,32 @@
                 "metadata": {
                     "description": "{{user `atlas_name`}} (amd64)\n\nMinimal installation with guest extensions:\n- Parallels Tools {{user `parallels_tools_version`}}\n- VirtualBox Guest Additions {{user `virtualbox_additions_version`}}\n- VMware Tools {{user `vmware_tools_version`}}\n\nPackages are current as of {{isotime \"2006-01-02\"}}.\n\nhttps://github.com/wholebits/baseboxes",
                     "provider": "libvirt",
+                    "short_description": "{{user `atlas_short_description`}} (amd64)",
+                    "version": "{{user `atlas_version`}}"
+                }
+            },
+            {
+                "type": "atlas",
+                "only": [ "ubuntu14.04-32-parallels" ],
+                "token": "{{user `atlas_token`}}",
+                "artifact": "{{user `atlas_username`}}/ubuntu14.04-32",
+                "artifact_type": "vagrant.box",
+                "metadata": {
+                    "description": "{{user `atlas_name`}} (i386)\n\nMinimal installation with guest extensions:\n- Parallels Tools {{user `parallels_tools_version`}}\n- VirtualBox Guest Additions {{user `virtualbox_additions_version`}}\n- VMware Tools {{user `vmware_tools_version`}}\n\nPackages are current as of {{isotime \"2006-01-02\"}}.\n\nhttps://github.com/wholebits/baseboxes",
+                    "provider": "parallels",
+                    "short_description": "{{user `atlas_short_description`}} (i386)",
+                    "version": "{{user `atlas_version`}}"
+                }
+            },
+            {
+                "type": "atlas",
+                "only": [ "ubuntu14.04-64-parallels" ],
+                "token": "{{user `atlas_token`}}",
+                "artifact": "{{user `atlas_username`}}/ubuntu14.04-64",
+                "artifact_type": "vagrant.box",
+                "metadata": {
+                    "description": "{{user `atlas_name`}} (amd64)\n\nMinimal installation with guest extensions:\n- Parallels Tools {{user `parallels_tools_version`}}\n- VirtualBox Guest Additions {{user `virtualbox_additions_version`}}\n- VMware Tools {{user `vmware_tools_version`}}\n\nPackages are current as of {{isotime \"2006-01-02\"}}.\n\nhttps://github.com/wholebits/baseboxes",
+                    "provider": "parallels",
                     "short_description": "{{user `atlas_short_description`}} (amd64)",
                     "version": "{{user `atlas_version`}}"
                 }

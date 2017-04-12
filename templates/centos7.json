@@ -6,44 +6,13 @@
         "atlas_username": null,
         "atlas_version": "{{isotime \"2006\"}}.{{isotime \"01\"}}.{{isotime \"02\"}}",
         "headless": "true",
-        "iso_sha256sum": "27bd866242ee058b7a5754e83d8ee8403e216b93d130d800852a96f41c34d86a",
+        "iso_sha256sum_url": "http://mirrors.kernel.org/centos/7/isos/x86_64/sha256sum.txt",
         "iso_url": "http://mirrors.kernel.org/centos/7/isos/x86_64/CentOS-7-x86_64-Minimal-1611.iso",
         "parallels_tools_version": null,
         "virtualbox_additions_version": null,
         "vmware_tools_version": null
     },
     "builders": [
-        {
-            "type": "parallels-iso",
-            "name": "centos7-parallels",
-            "ssh_username": "root",
-            "ssh_password": "packer",
-            "ssh_timeout": "10m",
-            "boot_command": [
-                "<tab><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs>",
-                "hostname=centos7 ks=http://{{.HTTPIP}}:{{.HTTPPort}}/ks.cfg<enter><wait>"
-            ],
-            "boot_wait": "5s",
-            "disk_size": 49152,
-            "guest_os_type": "centos7",
-            "hard_drive_interface": "sata",
-            "http_directory": "http/centos7",
-            "iso_checksum": "{{user `iso_sha256sum`}}",
-            "iso_checksum_type": "sha256",
-            "iso_url": "{{user `iso_url`}}",
-            "parallels_tools_flavor": "lin",
-            "parallels_tools_guest_path": "/dev/shm/prl-tools-{{.Flavor}}.iso",
-            "prlctl": [
-                [ "set", "{{.Name}}", "--device-set", "cdrom0", "--iface", "ide" ],
-                [ "set", "{{.Name}}", "--device-add", "hdd", "--type", "expand", "--size", "1024", "--iface", "sata" ],
-                [ "set", "{{.Name}}", "--device-set", "cdrom0", "--iface", "sata" ],
-                [ "set", "{{.Name}}", "--device-del", "sound0" ],
-                [ "set", "{{.Name}}", "--device-del", "usb" ],
-                [ "set", "{{.Name}}", "--videosize", "2" ]
-            ],
-            "shutdown_command": "halt -p",
-            "vm_name": "centos7"
-        },
         {
             "type": "qemu",
             "name": "centos7-libvirt",
@@ -59,12 +28,43 @@
             "disk_size": 49152,
             "headless": "{{user `headless`}}",
             "http_directory": "http/centos7",
-            "iso_checksum": "{{user `iso_sha256sum`}}",
             "iso_checksum_type": "sha256",
+            "iso_checksum_url": "{{user `iso_sha256sum_url`}}",
             "iso_url": "{{user `iso_url`}}",
             "machine_type": "q35",
             "qemuargs": [
                 [ "-m", "512" ]
+            ],
+            "shutdown_command": "halt -p",
+            "vm_name": "centos7"
+        },
+        {
+            "type": "parallels-iso",
+            "name": "centos7-parallels",
+            "ssh_username": "root",
+            "ssh_password": "packer",
+            "ssh_timeout": "10m",
+            "boot_command": [
+                "<tab><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs>",
+                "hostname=centos7 ks=http://{{.HTTPIP}}:{{.HTTPPort}}/ks.cfg<enter><wait>"
+            ],
+            "boot_wait": "5s",
+            "disk_size": 49152,
+            "guest_os_type": "centos7",
+            "hard_drive_interface": "sata",
+            "http_directory": "http/centos7",
+            "iso_checksum_type": "sha256",
+            "iso_checksum_url": "{{user `iso_sha256sum_url`}}",
+            "iso_url": "{{user `iso_url`}}",
+            "parallels_tools_flavor": "lin",
+            "parallels_tools_guest_path": "/dev/shm/prl-tools-{{.Flavor}}.iso",
+            "prlctl": [
+                [ "set", "{{.Name}}", "--device-set", "cdrom0", "--iface", "ide" ],
+                [ "set", "{{.Name}}", "--device-add", "hdd", "--type", "expand", "--size", "1024", "--iface", "sata" ],
+                [ "set", "{{.Name}}", "--device-set", "cdrom0", "--iface", "sata" ],
+                [ "set", "{{.Name}}", "--device-del", "sound0" ],
+                [ "set", "{{.Name}}", "--device-del", "usb" ],
+                [ "set", "{{.Name}}", "--videosize", "2" ]
             ],
             "shutdown_command": "halt -p",
             "vm_name": "centos7"
@@ -86,8 +86,8 @@
             "hard_drive_interface": "sata",
             "headless": "{{user `headless`}}",
             "http_directory": "http/centos7",
-            "iso_checksum": "{{user `iso_sha256sum`}}",
             "iso_checksum_type": "sha256",
+            "iso_checksum_url": "{{user `iso_sha256sum_url`}}",
             "iso_url": "{{user `iso_url`}}",
             "shutdown_command": "halt -p",
             "vboxmanage": [
@@ -118,8 +118,8 @@
             "guest_os_type": "rhel7-64",
             "headless": "{{user `headless`}}",
             "http_directory": "http/centos7",
-            "iso_checksum": "{{user `iso_sha256sum`}}",
             "iso_checksum_type": "sha256",
+            "iso_checksum_url": "{{user `iso_sha256sum_url`}}",
             "iso_url": "{{user `iso_url`}}",
             "shutdown_command": "halt -p",
             "tools_upload_flavor": "linux",
@@ -159,19 +159,6 @@
             },
             {
                 "type": "atlas",
-                "only": [ "centos7-parallels" ],
-                "token": "{{user `atlas_token`}}",
-                "artifact": "{{user `atlas_username`}}/centos7",
-                "artifact_type": "vagrant.box",
-                "metadata": {
-                    "description": "{{user `atlas_name`}} (x86_64)\n\nCore installation with guest extensions:\n- Parallels Tools {{user `parallels_tools_version`}}\n- VirtualBox Guest Additions {{user `virtualbox_additions_version`}}\n- VMware Tools {{user `vmware_tools_version`}}\n\nPackages are current as of {{isotime \"2006-01-02\"}}.\n\nhttps://github.com/wholebits/baseboxes",
-                    "provider": "parallels",
-                    "short_description": "{{user `atlas_short_description`}} (x86_64)",
-                    "version": "{{user `atlas_version`}}"
-                }
-            },
-            {
-                "type": "atlas",
                 "only": [ "centos7-libvirt" ],
                 "token": "{{user `atlas_token`}}",
                 "artifact": "{{user `atlas_username`}}/centos7",
@@ -179,6 +166,19 @@
                 "metadata": {
                     "description": "{{user `atlas_name`}} (x86_64)\n\nCore installation with guest extensions:\n- Parallels Tools {{user `parallels_tools_version`}}\n- VirtualBox Guest Additions {{user `virtualbox_additions_version`}}\n- VMware Tools {{user `vmware_tools_version`}}\n\nPackages are current as of {{isotime \"2006-01-02\"}}.\n\nhttps://github.com/wholebits/baseboxes",
                     "provider": "libvirt",
+                    "short_description": "{{user `atlas_short_description`}} (x86_64)",
+                    "version": "{{user `atlas_version`}}"
+                }
+            },
+            {
+                "type": "atlas",
+                "only": [ "centos7-parallels" ],
+                "token": "{{user `atlas_token`}}",
+                "artifact": "{{user `atlas_username`}}/centos7",
+                "artifact_type": "vagrant.box",
+                "metadata": {
+                    "description": "{{user `atlas_name`}} (x86_64)\n\nCore installation with guest extensions:\n- Parallels Tools {{user `parallels_tools_version`}}\n- VirtualBox Guest Additions {{user `virtualbox_additions_version`}}\n- VMware Tools {{user `vmware_tools_version`}}\n\nPackages are current as of {{isotime \"2006-01-02\"}}.\n\nhttps://github.com/wholebits/baseboxes",
+                    "provider": "parallels",
                     "short_description": "{{user `atlas_short_description`}} (x86_64)",
                     "version": "{{user `atlas_version`}}"
                 }
