@@ -263,9 +263,6 @@
                 "compression_level": 9,
                 "output": "{{.BuildName}}.box",
                 "override": {
-                    "virtualbox": {
-                        "vagrantfile_template": "vagrant/virtualbox"
-                    },
                     "vmware": {
                         "vagrantfile_template": "vagrant/vmware"
                     }
