@@ -1,14 +1,14 @@
 {
     "variables": {
         "atlas_token": null,
-        "atlas_name": "Ubuntu 17.04 (Zesty Zapus) Beta 2",
+        "atlas_name": "Ubuntu 17.04 (Zesty Zapus)",
         "atlas_short_description": "Ubuntu 17.04 (Zesty Zapus)",
         "atlas_username": null,
         "atlas_version": "{{isotime \"2006\"}}.{{isotime \"01\"}}.{{isotime \"02\"}}",
         "headless": "true",
         "iso_sha256sum_url": "http://releases.ubuntu.com/17.04/SHA256SUMS",
-        "iso_url_32": "http://releases.ubuntu.com/17.04/ubuntu-17.04-beta2-server-i386.iso",
-        "iso_url_64": "http://releases.ubuntu.com/17.04/ubuntu-17.04-beta2-server-amd64.iso",
+        "iso_url_32": "http://releases.ubuntu.com/17.04/ubuntu-17.04-server-i386.iso",
+        "iso_url_64": "http://releases.ubuntu.com/17.04/ubuntu-17.04-server-amd64.iso",
         "parallels_tools_version": null,
         "virtualbox_additions_version": null
     },
