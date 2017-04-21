@@ -7,7 +7,7 @@
         "atlas_version": "{{isotime \"2006\"}}.{{isotime \"01\"}}.{{isotime \"02\"}}",
         "headless": "true",
         "iso_sha256sum_url_32": "http://cdimage.debian.org/cdimage/archive/7.11.0/i386/iso-cd/SHA256SUMS",
-        "iso_sha256sum_url_32": "http://cdimage.debian.org/cdimage/archive/7.11.0/amd64/iso-cd/SHA256SUMS",
+        "iso_sha256sum_url_64": "http://cdimage.debian.org/cdimage/archive/7.11.0/amd64/iso-cd/SHA256SUMS",
         "iso_url_32": "http://cdimage.debian.org/cdimage/archive/7.11.0/i386/iso-cd/debian-7.11.0-i386-netinst.iso",
         "iso_url_64": "http://cdimage.debian.org/cdimage/archive/7.11.0/amd64/iso-cd/debian-7.11.0-amd64-netinst.iso",
         "parallels_tools_version": null, 
