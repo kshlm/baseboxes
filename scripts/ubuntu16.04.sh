@@ -49,8 +49,9 @@ case "$PACKER_BUILDER_TYPE" in
 		# Mount the ISO.
 		mount -o loop,ro /dev/shm/VBoxGuestAdditions.iso /mnt
 
-		# Install the guest additions.
-		/mnt/VBoxLinuxAdditions.run
+		# Install the guest additions. We expect the installer script to return exit
+		# code 2 because a version of the vboxguest kernel module is already present.
+		/mnt/VBoxLinuxAdditions.run || [ $? -eq 2 ]
 
 		# Unmount the ISO.
 		umount /mnt
