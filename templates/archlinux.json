@@ -1,16 +1,13 @@
 {
     "variables": {
         "atlas_token": null,
-        "atlas_name_32": "Arch Linux 2017.02.01",
-        "atlas_name_64": "Arch Linux 2017.04.01",
+        "atlas_name": "Arch Linux 2017.04.01",
         "atlas_short_description": "Arch Linux",
         "atlas_username": null,
         "atlas_version": "{{isotime \"2006\"}}.{{isotime \"01\"}}.{{isotime \"02\"}}",
         "headless": "true",
-        "iso_sha256sum_32": "4d9d67b1a20a3b44b0dd38679400971a68d5bd9f96608bd13a677d84b8a7ece5",
-        "iso_sha256sum_64": "02e1c8b1be161545e7321e07d842aa8e49118f49089d3331bf459ff58b08fd1c",
-        "iso_url_32": "http://mirrors.kernel.org/archlinux/iso/2017.02.01/archlinux-2017.02.01-dual.iso",
-        "iso_url_64": "http://mirrors.kernel.org/archlinux/iso/2017.04.01/archlinux-2017.04.01-x86_64.iso",
+        "iso_sha256sum": "02e1c8b1be161545e7321e07d842aa8e49118f49089d3331bf459ff58b08fd1c",
+        "iso_url": "http://mirrors.kernel.org/archlinux/iso/2017.04.01/archlinux-2017.04.01-x86_64.iso",
         "open_vm_tools_version": null,
         "parallels_tools_version": null,
         "virtualbox_additions_version": null
@@ -18,59 +15,35 @@
     "builders": [
         {
             "type": "qemu",
-            "name": "archlinux-32-libvirt",
+            "name": "archlinux-libvirt",
             "ssh_username": "root",
             "ssh_password": "packer",
             "accelerator": "kvm",
             "boot_command": [
-                "<down><enter><wait10><wait10><wait10>hostname archlinux-32 && ",
+                "<enter><wait10><wait10><wait10>hostname archlinux && ",
                 "curl -O http://{{.HTTPIP}}:{{.HTTPPort}}/install.sh && bash install.sh<enter>"
             ],
             "boot_wait": "5s",
             "disk_size": 49152,
             "headless": "{{user `headless`}}",
             "http_directory": "http/archlinux",
-            "iso_checksum": "{{user `iso_sha256sum_32`}}",
+            "iso_checksum": "{{user `iso_sha256sum`}}",
             "iso_checksum_type": "sha256",
-            "iso_url": "{{user `iso_url_32`}}",
+            "iso_url": "{{user `iso_url`}}",
             "machine_type": "q35",
             "qemuargs": [
                 [ "-m", "512" ]
             ],
             "shutdown_command": "halt -p",
-            "vm_name": "archlinux-32"
-        },
-        {
-            "type": "qemu",
-            "name": "archlinux-64-libvirt",
-            "ssh_username": "root",
-            "ssh_password": "packer",
-            "accelerator": "kvm",
-            "boot_command": [
-                "<enter><wait10><wait10><wait10>hostname archlinux-64 && ",
-                "curl -O http://{{.HTTPIP}}:{{.HTTPPort}}/install.sh && bash install.sh<enter>"
-            ],
-            "boot_wait": "5s",
-            "disk_size": 49152,
-            "headless": "{{user `headless`}}",
-            "http_directory": "http/archlinux",
-            "iso_checksum": "{{user `iso_sha256sum_64`}}",
-            "iso_checksum_type": "sha256",
-            "iso_url": "{{user `iso_url_64`}}",
-            "machine_type": "q35",
-            "qemuargs": [
-                [ "-m", "512" ]
-            ],
-            "shutdown_command": "halt -p",
-            "vm_name": "archlinux-64"
+            "vm_name": "archlinux"
         },
         {
             "type": "parallels-iso",
-            "name": "archlinux-32-parallels",
+            "name": "archlinux-parallels",
             "ssh_username": "root",
             "ssh_password": "packer",
             "boot_command": [
-                "<down><enter><wait10><wait10><wait10>hostname archlinux-32 && ",
+                "<enter><wait10><wait10><wait10>hostname archlinux && ",
                 "curl -O http://{{.HTTPIP}}:{{.HTTPPort}}/install.sh && bash install.sh<enter>"
             ],
             "boot_wait": "5s",
@@ -78,9 +51,9 @@
             "guest_os_type": "linux-2.6",
             "hard_drive_interface": "sata",
             "http_directory": "http/archlinux",
-            "iso_checksum": "{{user `iso_sha256sum_32`}}",
+            "iso_checksum": "{{user `iso_sha256sum`}}",
             "iso_checksum_type": "sha256",
-            "iso_url": "{{user `iso_url_32`}}",
+            "iso_url": "{{user `iso_url`}}",
             "parallels_tools_flavor": "lin",
             "parallels_tools_guest_path": "/dev/shm/prl-tools-{{.Flavor}}.iso",
             "prlctl": [
@@ -92,77 +65,15 @@
                 [ "set", "{{.Name}}", "--videosize", "2" ]
             ],
             "shutdown_command": "halt -p",
-            "vm_name": "archlinux-32"
-        },
-        {
-            "type": "parallels-iso",
-            "name": "archlinux-64-parallels",
-            "ssh_username": "root",
-            "ssh_password": "packer",
-            "boot_command": [
-                "<enter><wait10><wait10><wait10>hostname archlinux-64 && ",
-                "curl -O http://{{.HTTPIP}}:{{.HTTPPort}}/install.sh && bash install.sh<enter>"
-            ],
-            "boot_wait": "5s",
-            "disk_size": 49152,
-            "guest_os_type": "linux-2.6",
-            "hard_drive_interface": "sata",
-            "http_directory": "http/archlinux",
-            "iso_checksum": "{{user `iso_sha256sum_64`}}",
-            "iso_checksum_type": "sha256",
-            "iso_url": "{{user `iso_url_64`}}",
-            "parallels_tools_flavor": "lin",
-            "parallels_tools_guest_path": "/dev/shm/prl-tools-{{.Flavor}}.iso",
-            "prlctl": [
-                [ "set", "{{.Name}}", "--device-set", "cdrom0", "--iface", "ide" ],
-                [ "set", "{{.Name}}", "--device-add", "hdd", "--type", "expand", "--size", "1024", "--iface", "sata" ],
-                [ "set", "{{.Name}}", "--device-set", "cdrom0", "--iface", "sata" ],
-                [ "set", "{{.Name}}", "--device-del", "sound0" ],
-                [ "set", "{{.Name}}", "--device-del", "usb" ],
-                [ "set", "{{.Name}}", "--videosize", "2" ]
-            ],
-            "shutdown_command": "halt -p",
-            "vm_name": "archlinux-64"
+            "vm_name": "archlinux"
         },
         {
             "type": "virtualbox-iso",
-            "name": "archlinux-32-virtualbox",
+            "name": "archlinux-virtualbox",
             "ssh_username": "root",
             "ssh_password": "packer",
             "boot_command": [
-                "<enter><wait10><wait10><wait10>hostname archlinux-32 && ",
-                "curl -O http://{{.HTTPIP}}:{{.HTTPPort}}/install.sh && bash install.sh<enter>"
-            ],
-            "boot_wait": "5s",
-            "disk_size": 49152,
-            "guest_additions_mode": "disable",
-            "guest_os_type": "ArchLinux",
-            "hard_drive_interface": "sata",
-            "headless": "{{user `headless`}}",
-            "http_directory": "http/archlinux",
-            "iso_checksum": "{{user `iso_sha256sum_32`}}",
-            "iso_checksum_type": "sha256",
-            "iso_url": "{{user `iso_url_32`}}",
-            "shutdown_command": "halt -p",
-            "vboxmanage": [
-                [ "modifyvm", "{{.Name}}", "--vram", "5", "--rtcuseutc", "on", "--chipset", "ich9", "--nictype1", "virtio", "--audio", "none", "--usb", "off", "--usbehci", "off" ],
-                [ "createhd", "--format", "VDI", "--filename", "output-{{build_name}}/{{.Name}}-1.vdi", "--size", "1024" ],
-                [ "storageattach", "{{.Name}}", "--storagectl", "SATA Controller", "--port", "1", "--device", "0", "--type", "hdd", "--medium", "output-{{build_name}}/{{.Name}}-1.vdi" ]
-            ],
-            "vboxmanage_post": [
-                [ "storagectl", "{{.Name}}", "--name", "IDE Controller", "--remove" ],
-                [ "modifyhd", "output-{{build_name}}/{{.Name}}.vdi", "--compact" ],
-                [ "modifyhd", "output-{{build_name}}/{{.Name}}-1.vdi", "--compact" ]
-            ],
-            "vm_name": "archlinux-32"
-        },
-        {
-            "type": "virtualbox-iso",
-            "name": "archlinux-64-virtualbox",
-            "ssh_username": "root",
-            "ssh_password": "packer",
-            "boot_command": [
-                "<enter><wait10><wait10><wait10>hostname archlinux-64 && ",
+                "<enter><wait10><wait10><wait10>hostname archlinux && ",
                 "curl -O http://{{.HTTPIP}}:{{.HTTPPort}}/install.sh && bash install.sh<enter>"
             ],
             "boot_wait": "5s",
@@ -172,9 +83,9 @@
             "hard_drive_interface": "sata",
             "headless": "{{user `headless`}}",
             "http_directory": "http/archlinux",
-            "iso_checksum": "{{user `iso_sha256sum_64`}}",
+            "iso_checksum": "{{user `iso_sha256sum`}}",
             "iso_checksum_type": "sha256",
-            "iso_url": "{{user `iso_url_64`}}",
+            "iso_url": "{{user `iso_url`}}",
             "shutdown_command": "halt -p",
             "vboxmanage": [
                 [ "modifyvm", "{{.Name}}", "--vram", "5", "--rtcuseutc", "on", "--chipset", "ich9", "--nictype1", "virtio", "--audio", "none", "--usb", "off", "--usbehci", "off" ],
@@ -186,45 +97,15 @@
                 [ "modifyhd", "output-{{build_name}}/{{.Name}}.vdi", "--compact" ],
                 [ "modifyhd", "output-{{build_name}}/{{.Name}}-1.vdi", "--compact" ]
             ],
-            "vm_name": "archlinux-64"
+            "vm_name": "archlinux"
         },
         {
             "type": "vmware-iso",
-            "name": "archlinux-32-vmware",
+            "name": "archlinux-vmware",
             "ssh_username": "root",
             "ssh_password": "packer",
             "boot_command": [
-                "<down><enter><wait10><wait10><wait10>hostname archlinux-32 && ",
-                "curl -O http://{{.HTTPIP}}:{{.HTTPPort}}/install.sh && bash install.sh<enter>"
-            ],
-            "boot_wait": "5s",
-            "disk_additional_size": [ 1024 ],
-            "disk_size": 49152,
-            "guest_os_type": "other26xlinux",
-            "headless": "{{user `headless`}}",
-            "http_directory": "http/archlinux",
-            "iso_checksum": "{{user `iso_sha256sum_32`}}",
-            "iso_checksum_type": "sha256",
-            "iso_url": "{{user `iso_url_32`}}",
-            "shutdown_command": "halt -p",
-            "vm_name": "archlinux-32",
-            "vmx_data": {
-                "ethernet0.virtualdev": "vmxnet3",
-                "memsize": "512",
-                "scsi0.virtualdev": "pvscsi"
-            },
-            "vmx_data_post": {
-                "ide1:0.present": "FALSE"
-            },
-            "vmdk_name": "archlinux-32"
-        },
-        {
-            "type": "vmware-iso",
-            "name": "archlinux-64-vmware",
-            "ssh_username": "root",
-            "ssh_password": "packer",
-            "boot_command": [
-                "<enter><wait10><wait10><wait10>hostname archlinux-64 && ",
+                "<enter><wait10><wait10><wait10>hostname archlinux && ",
                 "curl -O http://{{.HTTPIP}}:{{.HTTPPort}}/install.sh && bash install.sh<enter>"
             ],
             "boot_wait": "5s",
@@ -233,11 +114,11 @@
             "guest_os_type": "other26xlinux-64",
             "headless": "{{user `headless`}}",
             "http_directory": "http/archlinux",
-            "iso_checksum": "{{user `iso_sha256sum_64`}}",
+            "iso_checksum": "{{user `iso_sha256sum`}}",
             "iso_checksum_type": "sha256",
-            "iso_url": "{{user `iso_url_64`}}",
+            "iso_url": "{{user `iso_url`}}",
             "shutdown_command": "halt -p",
-            "vm_name": "archlinux-64",
+            "vm_name": "archlinux",
             "vmx_data": {
                 "ethernet0.virtualdev": "vmxnet3",
                 "memsize": "512",
@@ -246,7 +127,7 @@
             "vmx_data_post": {
                 "ide1:0.present": "FALSE"
             },
-            "vmdk_name": "archlinux-64"
+            "vmdk_name": "archlinux"
         }
     ],
     "provisioners": [
@@ -272,25 +153,12 @@
             },
             {
                 "type": "atlas",
-                "only": [ "archlinux-32-libvirt" ],
+                "only": [ "archlinux-libvirt" ],
                 "token": "{{user `atlas_token`}}",
-                "artifact": "{{user `atlas_username`}}/archlinux-32",
+                "artifact": "{{user `atlas_username`}}/archlinux",
                 "artifact_type": "vagrant.box",
                 "metadata": {
-                    "description": "{{user `atlas_name_32`}} (i686)\n\nMinimal installation with guest extensions:\n- Parallels Tools {{user `parallels_tools_version`}}\n- VirtualBox Guest Additions {{user `virtualbox_additions_version`}}\n- Open-VM-Tools {{user `open_vm_tools_version`}}\n\nPackages are current as of {{isotime \"2006-01-02\"}}.\n\nhttps://github.com/wholebits/baseboxes",
-                    "provider": "libvirt",
-                    "short_description": "{{user `atlas_short_description`}} (i686)",
-                    "version": "{{user `atlas_version`}}"
-                }
-            },
-            {
-                "type": "atlas",
-                "only": [ "archlinux-64-libvirt" ],
-                "token": "{{user `atlas_token`}}",
-                "artifact": "{{user `atlas_username`}}/archlinux-64",
-                "artifact_type": "vagrant.box",
-                "metadata": {
-                    "description": "{{user `atlas_name_64`}} (x86_64)\n\nMinimal installation with guest extensions:\n- Parallels Tools {{user `parallels_tools_version`}}\n- VirtualBox Guest Additions {{user `virtualbox_additions_version`}}\n- Open-VM-Tools {{user `open_vm_tools_version`}}\n\nPackages are current as of {{isotime \"2006-01-02\"}}.\n\nhttps://github.com/wholebits/baseboxes",
+                    "description": "{{user `atlas_name`}} (x86_64)\n\nMinimal installation with guest extensions:\n- Parallels Tools {{user `parallels_tools_version`}}\n- VirtualBox Guest Additions {{user `virtualbox_additions_version`}}\n- Open-VM-Tools {{user `open_vm_tools_version`}}\n\nPackages are current as of {{isotime \"2006-01-02\"}}.\n\nhttps://github.com/wholebits/baseboxes",
                     "provider": "libvirt",
                     "short_description": "{{user `atlas_short_description`}} (x86_64)",
                     "version": "{{user `atlas_version`}}"
@@ -298,25 +166,12 @@
             },
             {
                 "type": "atlas",
-                "only": [ "archlinux-32-parallels" ],
+                "only": [ "archlinux-parallels" ],
                 "token": "{{user `atlas_token`}}",
-                "artifact": "{{user `atlas_username`}}/archlinux-32",
+                "artifact": "{{user `atlas_username`}}/archlinux",
                 "artifact_type": "vagrant.box",
                 "metadata": {
-                    "description": "{{user `atlas_name_32`}} (i686)\n\nMinimal installation with guest extensions:\n- Parallels Tools {{user `parallels_tools_version`}}\n- VirtualBox Guest Additions {{user `virtualbox_additions_version`}}\n- Open-VM-Tools {{user `open_vm_tools_version`}}\n\nPackages are current as of {{isotime \"2006-01-02\"}}.\n\nhttps://github.com/wholebits/baseboxes",
-                    "provider": "parallels",
-                    "short_description": "{{user `atlas_short_description`}} (i686)",
-                    "version": "{{user `atlas_version`}}"
-                }
-            },
-            {
-                "type": "atlas",
-                "only": [ "archlinux-64-parallels" ],
-                "token": "{{user `atlas_token`}}",
-                "artifact": "{{user `atlas_username`}}/archlinux-64",
-                "artifact_type": "vagrant.box",
-                "metadata": {
-                    "description": "{{user `atlas_name_64`}} (x86_64)\n\nMinimal installation with guest extensions:\n- Parallels Tools {{user `parallels_tools_version`}}\n- VirtualBox Guest Additions {{user `virtualbox_additions_version`}}\n- Open-VM-Tools {{user `open_vm_tools_version`}}\n\nPackages are current as of {{isotime \"2006-01-02\"}}.\n\nhttps://github.com/wholebits/baseboxes",
+                    "description": "{{user `atlas_name`}} (x86_64)\n\nMinimal installation with guest extensions:\n- Parallels Tools {{user `parallels_tools_version`}}\n- VirtualBox Guest Additions {{user `virtualbox_additions_version`}}\n- Open-VM-Tools {{user `open_vm_tools_version`}}\n\nPackages are current as of {{isotime \"2006-01-02\"}}.\n\nhttps://github.com/wholebits/baseboxes",
                     "provider": "parallels",
                     "short_description": "{{user `atlas_short_description`}} (x86_64)",
                     "version": "{{user `atlas_version`}}"
@@ -324,25 +179,12 @@
             },
             {
                 "type": "atlas",
-                "only": [ "archlinux-32-virtualbox" ],
+                "only": [ "archlinux-virtualbox" ],
                 "token": "{{user `atlas_token`}}",
-                "artifact": "{{user `atlas_username`}}/archlinux-32",
+                "artifact": "{{user `atlas_username`}}/archlinux",
                 "artifact_type": "vagrant.box",
                 "metadata": {
-                    "description": "{{user `atlas_name_32`}} (i686)\n\nMinimal installation with guest extensions:\n- Parallels Tools {{user `parallels_tools_version`}}\n- VirtualBox Guest Additions {{user `virtualbox_additions_version`}}\n- Open-VM-Tools {{user `open_vm_tools_version`}}\n\nPackages are current as of {{isotime \"2006-01-02\"}}.\n\nhttps://github.com/wholebits/baseboxes",
-                    "provider": "virtualbox",
-                    "short_description": "{{user `atlas_short_description`}} (i686)",
-                    "version": "{{user `atlas_version`}}"
-                }
-            },
-            {
-                "type": "atlas",
-                "only": [ "archlinux-64-virtualbox" ],
-                "token": "{{user `atlas_token`}}",
-                "artifact": "{{user `atlas_username`}}/archlinux-64",
-                "artifact_type": "vagrant.box",
-                "metadata": {
-                    "description": "{{user `atlas_name_64`}} (x86_64)\n\nMinimal installation with guest extensions:\n- Parallels Tools {{user `parallels_tools_version`}}\n- VirtualBox Guest Additions {{user `virtualbox_additions_version`}}\n- Open-VM-Tools {{user `open_vm_tools_version`}}\n\nPackages are current as of {{isotime \"2006-01-02\"}}.\n\nhttps://github.com/wholebits/baseboxes",
+                    "description": "{{user `atlas_name`}} (x86_64)\n\nMinimal installation with guest extensions:\n- Parallels Tools {{user `parallels_tools_version`}}\n- VirtualBox Guest Additions {{user `virtualbox_additions_version`}}\n- Open-VM-Tools {{user `open_vm_tools_version`}}\n\nPackages are current as of {{isotime \"2006-01-02\"}}.\n\nhttps://github.com/wholebits/baseboxes",
                     "provider": "virtualbox",
                     "short_description": "{{user `atlas_short_description`}} (x86_64)",
                     "version": "{{user `atlas_version`}}"
@@ -350,25 +192,12 @@
             },
             {
                 "type": "atlas",
-                "only": [ "archlinux-32-vmware" ],
+                "only": [ "archlinux-vmware" ],
                 "token": "{{user `atlas_token`}}",
-                "artifact": "{{user `atlas_username`}}/archlinux-32",
+                "artifact": "{{user `atlas_username`}}/archlinux",
                 "artifact_type": "vagrant.box",
                 "metadata": {
-                    "description": "{{user `atlas_name_32`}} (i686)\n\nMinimal installation with guest extensions:\n- Parallels Tools {{user `parallels_tools_version`}}\n- VirtualBox Guest Additions {{user `virtualbox_additions_version`}}\n- Open-VM-Tools {{user `open_vm_tools_version`}}\n\nPackages are current as of {{isotime \"2006-01-02\"}}.\n\nhttps://github.com/wholebits/baseboxes",
-                    "provider": "vmware_desktop",
-                    "short_description": "{{user `atlas_short_description`}} (i686)",
-                    "version": "{{user `atlas_version`}}"
-                }
-            },
-            {
-                "type": "atlas",
-                "only": [ "archlinux-64-vmware" ],
-                "token": "{{user `atlas_token`}}",
-                "artifact": "{{user `atlas_username`}}/archlinux-64",
-                "artifact_type": "vagrant.box",
-                "metadata": {
-                    "description": "{{user `atlas_name_64`}} (x86_64)\n\nMinimal installation with guest extensions:\n- Parallels Tools {{user `parallels_tools_version`}}\n- VirtualBox Guest Additions {{user `virtualbox_additions_version`}}\n- Open-VM-Tools {{user `open_vm_tools_version`}}\n\nPackages are current as of {{isotime \"2006-01-02\"}}.\n\nhttps://github.com/wholebits/baseboxes",
+                    "description": "{{user `atlas_name`}} (x86_64)\n\nMinimal installation with guest extensions:\n- Parallels Tools {{user `parallels_tools_version`}}\n- VirtualBox Guest Additions {{user `virtualbox_additions_version`}}\n- Open-VM-Tools {{user `open_vm_tools_version`}}\n\nPackages are current as of {{isotime \"2006-01-02\"}}.\n\nhttps://github.com/wholebits/baseboxes",
                     "provider": "vmware_desktop",
                     "short_description": "{{user `atlas_short_description`}} (x86_64)",
                     "version": "{{user `atlas_version`}}"
