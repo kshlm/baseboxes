@@ -1,13 +1,13 @@
 {
     "variables": {
         "atlas_token": null,
-        "atlas_name": "Arch Linux 2017.04.01",
+        "atlas_name": "Arch Linux 2017.05.01",
         "atlas_short_description": "Arch Linux",
         "atlas_username": null,
         "atlas_version": "{{isotime \"2006\"}}.{{isotime \"01\"}}.{{isotime \"02\"}}",
         "headless": "true",
-        "iso_sha256sum": "02e1c8b1be161545e7321e07d842aa8e49118f49089d3331bf459ff58b08fd1c",
-        "iso_url": "http://mirrors.kernel.org/archlinux/iso/2017.04.01/archlinux-2017.04.01-x86_64.iso",
+        "iso_sha256sum": "f01021643b98f12e6737ca11c97aabefd263fe61b809a47653633f0f1ef6e508",
+        "iso_url": "http://mirrors.kernel.org/archlinux/iso/2017.05.01/archlinux-2017.05.01-x86_64.iso",
         "open_vm_tools_version": null,
         "parallels_tools_version": null,
         "virtualbox_additions_version": null
