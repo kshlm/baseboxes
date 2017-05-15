@@ -21,8 +21,6 @@ All boxes are configured as follows:
 | ---------------- | ------------------------------------------- |
 | `archlinux-32`   | Arch Linux (i686)                           |
 | `archlinux-64`   | Arch Linux (x86_64)                         |
-| `centos5-32`     | CentOS Linux 5 (i386)                       |
-| `centos5-64`     | CentOS Linux 5 (x86_64)                     |
 | `centos6-32`     | CentOS Linux 6 (i386)                       |
 | `centos6-64`     | CentOS Linux 6 (x86_64)                     |
 | `centos7`        | CentOS Linux 7 (x86_64)                     |
