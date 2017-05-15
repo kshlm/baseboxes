@@ -1,15 +1,15 @@
 {
     "variables": {
         "atlas_token": null,
-        "atlas_name": "CentOS Linux 6.8",
-        "atlas_short_description": "CentOS Linux 6",
+        "atlas_name": "CentOS 6.9",
+        "atlas_short_description": "CentOS 6",
         "atlas_username": null,
         "atlas_version": "{{isotime \"2006\"}}.{{isotime \"01\"}}.{{isotime \"02\"}}",
         "headless": "true",
-        "iso_sha256sum_url_32": "http://mirrors.kernel.org/centos/6.8/isos/i386/sha256sum.txt",
-        "iso_sha256sum_url_64": "http://mirrors.kernel.org/centos/6.8/isos/x86_64/sha256sum.txt",
-        "iso_url_32": "http://mirrors.kernel.org/centos/6.8/isos/i386/CentOS-6.8-i386-minimal.iso",
-        "iso_url_64": "http://mirrors.kernel.org/centos/6.8/isos/x86_64/CentOS-6.8-x86_64-minimal.iso",
+        "iso_sha256sum_url_32": "http://mirrors.kernel.org/centos/6.9/isos/i386/sha256sum.txt",
+        "iso_sha256sum_url_64": "http://mirrors.kernel.org/centos/6.9/isos/x86_64/sha256sum.txt",
+        "iso_url_32": "http://mirrors.kernel.org/centos/6.9/isos/i386/CentOS-6.9-i386-minimal.iso",
+        "iso_url_64": "http://mirrors.kernel.org/centos/6.9/isos/x86_64/CentOS-6.9-x86_64-minimal.iso",
         "parallels_tools_version": null,
         "virtualbox_additions_version": null,
         "vmware_tools_version": null
