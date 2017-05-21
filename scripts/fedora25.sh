@@ -56,52 +56,6 @@ case "$PACKER_BUILDER_TYPE" in
 		rm -r /var/lib/dnf /var/log/dnf.* /var/log/hawkey.log
 		mv /var/lib/dnf.preserve /var/lib/dnf
 		;;
-
-	vmware-iso)
-		# Install prerequisites.
-		dnf -y install fuse policycoreutils-python-utils
-		modprobe fuse
-
-		# Preserve DNF metadata.
-		mv /var/lib/dnf /var/lib/dnf.preserve
-
-		# Install development tools.
-		dnf -y install net-tools perl-File-Temp tar
-
-		# Mount the ISO.
-		mount -o loop,ro /dev/shm/linux.iso /mnt
-
-		# Extract the tools distribution.
-		tar xzCf /tmp /mnt/VMwareTools-*.tar.gz
-
-		# Unmount the ISO.
-		umount /mnt
-
-		# Install the tools.
-		/tmp/vmware-tools-distrib/vmware-install.pl --default --force-install
-
-		# Reclaim some wasted disk space.
-		case $(uname -m) in
-			i686)
-				rm -r /usr/lib/vmware-tools/bin64 /usr/lib/vmware-tools/lib64
-				rm -r /usr/lib/vmware-tools/plugins64 /usr/lib/vmware-tools/sbin64
-				;;
-			x86_64)
-				rm -r /usr/lib/vmware-tools/bin32 /usr/lib/vmware-tools/lib32
-				rm -r /usr/lib/vmware-tools/plugins32 /usr/lib/vmware-tools/sbin32
-				;;
-		esac
-
-		# Remove the distribution.
-		rm -r /tmp/vmware-tools-distrib
-
-		# Remove development tools.
-		dnf -y history undo last
-
-		# Restore DNF metadata.
-		rm -r /var/lib/dnf /var/log/dnf.* /var/log/hawkey.log
-		mv /var/lib/dnf.preserve /var/lib/dnf
-		;;
 esac
 
 # Create the vagrant user.

@@ -78,14 +78,14 @@ The following Vagrant providers are supported:
 
 ### Packer Variables
 
-| Name                          | Description                                               |
-| ----------------------------- | --------------------------------------------------------- |
-| `atlas_username`              | Atlas username or organization name                       |
-| `atlas_token`                 | Atlas API token                                           |
-| `open_vm_tools_version`       | String to be included in Atlas description for Arch Linux |
-| `parallels_tools_version`     | String to be included in Atlas description                |
-| `virtualbox_additions_version`| String to be included in Atlas description                |
-| `vmware_tools_version`        | String to be included in Atlas description                |
+| Name                          | Description                                |
+| ----------------------------- | ------------------------------------------ |
+| `atlas_username`              | Atlas username or organization name        |
+| `atlas_token`                 | Atlas API token                            |
+| `open_vm_tools_version`       | String to be included in Atlas description |
+| `parallels_tools_version`     | String to be included in Atlas description |
+| `virtualbox_additions_version`| String to be included in Atlas description |
+| `vmware_tools_version`        | String to be included in Atlas description |
 
 ### Example
 
@@ -93,9 +93,10 @@ The following Vagrant providers are supported:
 {
     "atlas_token": "ABCDEFGHIJKLMN.atlasv1.OPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQRS",
     "atlas_username": "username",
-    "parallels_tools_version": "12.0.2",
-    "virtualbox_additions_version": "5.1.8",
-    "vmware_tools_version": "10.1.0"
+    "open_vm_tools_version": "10.1.5",
+    "parallels_tools_version": "12.2.0",
+    "virtualbox_additions_version": "5.1.22",
+    "vmware_tools_version": "10.1.7"
 }
 ```
 

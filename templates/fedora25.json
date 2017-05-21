@@ -12,7 +12,7 @@
         "iso_url_64": "https://download.fedoraproject.org/pub/fedora/linux/releases/25/Server/x86_64/iso/Fedora-Server-netinst-x86_64-25-1.3.iso",
         "parallels_tools_version": null, 
         "virtualbox_additions_version": null,
-        "vmware_tools_version": null
+        "open_vm_tools_version": null
     },
     "builders": [
         {
@@ -230,8 +230,6 @@
             "iso_checksum_url": "{{user `iso_sha256sum_url_32`}}",
             "iso_url": "{{user `iso_url_32`}}",
             "shutdown_command": "halt -p",
-            "tools_upload_flavor": "linux",
-            "tools_upload_path": "/dev/shm/{{.Flavor}}.iso",
             "vm_name": "fedora25-32",
             "vmx_data": {
                 "memsize": "1024",
@@ -265,8 +263,6 @@
             "iso_checksum_url": "{{user `iso_sha256sum_url_64`}}",
             "iso_url": "{{user `iso_url_64`}}",
             "shutdown_command": "halt -p",
-            "tools_upload_flavor": "linux",
-            "tools_upload_path": "/dev/shm/{{.Flavor}}.iso",
             "vm_name": "fedora25-64",
             "vmx_data": {
                 "memsize": "1024",
@@ -308,7 +304,7 @@
                 "artifact": "{{user `atlas_username`}}/fedora25-32",
                 "artifact_type": "vagrant.box",
                 "metadata": {
-                    "description": "{{user `atlas_name`}} (i386)\n\nCore installation with guest extensions:\n- Parallels Tools {{user `parallels_tools_version`}}\n- VirtualBox Guest Additions {{user `virtualbox_additions_version`}}\n- VMware Tools {{user `vmware_tools_version`}}\n\nPackages are current as of {{isotime \"2006-01-02\"}}.\n\nhttps://github.com/wholebits/baseboxes",
+                    "description": "{{user `atlas_name`}} (i386)\n\nCore installation with guest extensions:\n- Parallels Tools {{user `parallels_tools_version`}}\n- VirtualBox Guest Additions {{user `virtualbox_additions_version`}}\n- Open-VM-Tools {{user `open_vm_tools_version`}}\n\nPackages are current as of {{isotime \"2006-01-02\"}}.\n\nhttps://github.com/wholebits/baseboxes",
                     "provider": "libvirt",
                     "short_description": "{{user `atlas_short_description`}} (i386)",
                     "version": "{{user `atlas_version`}}"
@@ -321,7 +317,7 @@
                 "artifact": "{{user `atlas_username`}}/fedora25-64",
                 "artifact_type": "vagrant.box",
                 "metadata": {
-                    "description": "{{user `atlas_name`}} (x86_64)\n\nCore installation with guest extensions:\n- Parallels Tools {{user `parallels_tools_version`}}\n- VirtualBox Guest Additions {{user `virtualbox_additions_version`}}\n- VMware Tools {{user `vmware_tools_version`}}\n\nPackages are current as of {{isotime \"2006-01-02\"}}.\n\nhttps://github.com/wholebits/baseboxes",
+                    "description": "{{user `atlas_name`}} (x86_64)\n\nCore installation with guest extensions:\n- Parallels Tools {{user `parallels_tools_version`}}\n- VirtualBox Guest Additions {{user `virtualbox_additions_version`}}\n- Open-VM-Tools {{user `open_vm_tools_version`}}\n\nPackages are current as of {{isotime \"2006-01-02\"}}.\n\nhttps://github.com/wholebits/baseboxes",
                     "provider": "libvirt",
                     "short_description": "{{user `atlas_short_description`}} (x86_64)",
                     "version": "{{user `atlas_version`}}"
@@ -334,7 +330,7 @@
                 "artifact": "{{user `atlas_username`}}/fedora25-32",
                 "artifact_type": "vagrant.box",
                 "metadata": {
-                    "description": "{{user `atlas_name`}} (i386)\n\nCore installation with guest extensions:\n- Parallels Tools {{user `parallels_tools_version`}}\n- VirtualBox Guest Additions {{user `virtualbox_additions_version`}}\n- VMware Tools {{user `vmware_tools_version`}}\n\nPackages are current as of {{isotime \"2006-01-02\"}}.\n\nhttps://github.com/wholebits/baseboxes",
+                    "description": "{{user `atlas_name`}} (i386)\n\nCore installation with guest extensions:\n- Parallels Tools {{user `parallels_tools_version`}}\n- VirtualBox Guest Additions {{user `virtualbox_additions_version`}}\n- Open-VM-Tools {{user `open_vm_tools_version`}}\n\nPackages are current as of {{isotime \"2006-01-02\"}}.\n\nhttps://github.com/wholebits/baseboxes",
                     "provider": "parallels",
                     "short_description": "{{user `atlas_short_description`}} (i386)",
                     "version": "{{user `atlas_version`}}"
@@ -347,7 +343,7 @@
                 "artifact": "{{user `atlas_username`}}/fedora25-64",
                 "artifact_type": "vagrant.box",
                 "metadata": {
-                    "description": "{{user `atlas_name`}} (x86_64)\n\nCore installation with guest extensions:\n- Parallels Tools {{user `parallels_tools_version`}}\n- VirtualBox Guest Additions {{user `virtualbox_additions_version`}}\n- VMware Tools {{user `vmware_tools_version`}}\n\nPackages are current as of {{isotime \"2006-01-02\"}}.\n\nhttps://github.com/wholebits/baseboxes",
+                    "description": "{{user `atlas_name`}} (x86_64)\n\nCore installation with guest extensions:\n- Parallels Tools {{user `parallels_tools_version`}}\n- VirtualBox Guest Additions {{user `virtualbox_additions_version`}}\n- Open-VM-Tools {{user `open_vm_tools_version`}}\n\nPackages are current as of {{isotime \"2006-01-02\"}}.\n\nhttps://github.com/wholebits/baseboxes",
                     "provider": "parallels",
                     "short_description": "{{user `atlas_short_description`}} (x86_64)",
                     "version": "{{user `atlas_version`}}"
@@ -360,7 +356,7 @@
                 "artifact": "{{user `atlas_username`}}/fedora25-32",
                 "artifact_type": "vagrant.box",
                 "metadata": {
-                    "description": "{{user `atlas_name`}} (i386)\n\nCore installation with guest extensions:\n- Parallels Tools {{user `parallels_tools_version`}}\n- VirtualBox Guest Additions {{user `virtualbox_additions_version`}}\n- VMware Tools {{user `vmware_tools_version`}}\n\nPackages are current as of {{isotime \"2006-01-02\"}}.\n\nhttps://github.com/wholebits/baseboxes",
+                    "description": "{{user `atlas_name`}} (i386)\n\nCore installation with guest extensions:\n- Parallels Tools {{user `parallels_tools_version`}}\n- VirtualBox Guest Additions {{user `virtualbox_additions_version`}}\n- Open-VM-Tools {{user `open_vm_tools_version`}}\n\nPackages are current as of {{isotime \"2006-01-02\"}}.\n\nhttps://github.com/wholebits/baseboxes",
                     "provider": "virtualbox",
                     "short_description": "{{user `atlas_short_description`}} (i386)",
                     "version": "{{user `atlas_version`}}"
@@ -373,7 +369,7 @@
                 "artifact": "{{user `atlas_username`}}/fedora25-64",
                 "artifact_type": "vagrant.box",
                 "metadata": {
-                    "description": "{{user `atlas_name`}} (x86_64)\n\nCore installation with guest extensions:\n- Parallels Tools {{user `parallels_tools_version`}}\n- VirtualBox Guest Additions {{user `virtualbox_additions_version`}}\n- VMware Tools {{user `vmware_tools_version`}}\n\nPackages are current as of {{isotime \"2006-01-02\"}}.\n\nhttps://github.com/wholebits/baseboxes",
+                    "description": "{{user `atlas_name`}} (x86_64)\n\nCore installation with guest extensions:\n- Parallels Tools {{user `parallels_tools_version`}}\n- VirtualBox Guest Additions {{user `virtualbox_additions_version`}}\n- Open-VM-Tools {{user `open_vm_tools_version`}}\n\nPackages are current as of {{isotime \"2006-01-02\"}}.\n\nhttps://github.com/wholebits/baseboxes",
                     "provider": "virtualbox",
                     "short_description": "{{user `atlas_short_description`}} (x86_64)",
                     "version": "{{user `atlas_version`}}"
@@ -386,7 +382,7 @@
                 "artifact": "{{user `atlas_username`}}/fedora25-32",
                 "artifact_type": "vagrant.box",
                 "metadata": {
-                    "description": "{{user `atlas_name`}} (i386)\n\nCore installation with guest extensions:\n- Parallels Tools {{user `parallels_tools_version`}}\n- VirtualBox Guest Additions {{user `virtualbox_additions_version`}}\n- VMware Tools {{user `vmware_tools_version`}}\n\nPackages are current as of {{isotime \"2006-01-02\"}}.\n\nhttps://github.com/wholebits/baseboxes",
+                    "description": "{{user `atlas_name`}} (i386)\n\nCore installation with guest extensions:\n- Parallels Tools {{user `parallels_tools_version`}}\n- VirtualBox Guest Additions {{user `virtualbox_additions_version`}}\n- Open-VM-Tools {{user `open_vm_tools_version`}}\n\nPackages are current as of {{isotime \"2006-01-02\"}}.\n\nhttps://github.com/wholebits/baseboxes",
                     "provider": "vmware_desktop",
                     "short_description": "{{user `atlas_short_description`}} (i386)",
                     "version": "{{user `atlas_version`}}"
@@ -399,7 +395,7 @@
                 "artifact": "{{user `atlas_username`}}/fedora25-64",
                 "artifact_type": "vagrant.box",
                 "metadata": {
-                    "description": "{{user `atlas_name`}} (x86_64)\n\nCore installation with guest extensions:\n- Parallels Tools {{user `parallels_tools_version`}}\n- VirtualBox Guest Additions {{user `virtualbox_additions_version`}}\n- VMware Tools {{user `vmware_tools_version`}}\n\nPackages are current as of {{isotime \"2006-01-02\"}}.\n\nhttps://github.com/wholebits/baseboxes",
+                    "description": "{{user `atlas_name`}} (x86_64)\n\nCore installation with guest extensions:\n- Parallels Tools {{user `parallels_tools_version`}}\n- VirtualBox Guest Additions {{user `virtualbox_additions_version`}}\n- Open-VM-Tools {{user `open_vm_tools_version`}}\n\nPackages are current as of {{isotime \"2006-01-02\"}}.\n\nhttps://github.com/wholebits/baseboxes",
                     "provider": "vmware_desktop",
                     "short_description": "{{user `atlas_short_description`}} (x86_64)",
                     "version": "{{user `atlas_version`}}"
