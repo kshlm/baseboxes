@@ -27,6 +27,8 @@ All boxes are configured as follows:
 | `debian7-64`     | Debian 7 (wheezy) (amd64)                   |
 | `debian8-32`     | Debian 8 (jessie) (i386)                    |
 | `debian8-64`     | Debian 8 (jessie) (amd64)                   |
+| `debian9-32`     | Debian 9 (stretch) (i386)                   |
+| `debian9-64`     | Debian 9 (stretch) (amd64)                  |
 | `fedora24-32`    | Fedora 24 (i386)                            |
 | `fedora24-64`    | Fedora 24 (x86_64)                          |
 | `fedora25-32`    | Fedora 25 (i386)                            |
