@@ -1,15 +1,15 @@
 {
     "variables": {
-        "atlas_token": null,
-        "atlas_name": "Ubuntu 14.04.5 LTS (Trusty Tahr)",
-        "atlas_short_description": "Ubuntu 14.04 LTS (Trusty Tahr)",
-        "atlas_username": null,
-        "atlas_version": "{{isotime \"2006\"}}.{{isotime \"01\"}}.{{isotime \"02\"}}",
         "headless": "true",
         "iso_sha256sum_url": "http://releases.ubuntu.com/14.04.5/SHA256SUMS",
         "iso_url_32": "http://releases.ubuntu.com/14.04.5/ubuntu-14.04.5-server-i386.iso",
         "iso_url_64": "http://releases.ubuntu.com/14.04.5/ubuntu-14.04.5-server-amd64.iso",
         "parallels_tools_version": null,
+        "vagrantcloud_name": "Ubuntu 14.04.5 LTS (Trusty Tahr)",
+        "vagrantcloud_no_release": "true",
+        "vagrantcloud_token": null,
+        "vagrantcloud_username": null,
+        "vagrantcloud_version": "{{isotime \"2006\"}}.{{isotime \"01\"}}.{{isotime \"02\"}}",
         "virtualbox_additions_version": null,
         "vmware_tools_version": null
     },
@@ -289,108 +289,76 @@
                 }
             },
             {
-                "type": "atlas",
+                "type": "vagrant-cloud",
                 "only": [ "ubuntu14.04-32-libvirt" ],
-                "token": "{{user `atlas_token`}}",
-                "artifact": "{{user `atlas_username`}}/ubuntu14.04-32",
-                "artifact_type": "vagrant.box",
-                "metadata": {
-                    "description": "{{user `atlas_name`}} (i386)\n\nMinimal installation with guest extensions:\n- Parallels Tools {{user `parallels_tools_version`}}\n- VirtualBox Guest Additions {{user `virtualbox_additions_version`}}\n- VMware Tools {{user `vmware_tools_version`}}\n\nPackages are current as of {{isotime \"2006-01-02\"}}.\n\nhttps://github.com/wholebits/baseboxes",
-                    "provider": "libvirt",
-                    "short_description": "{{user `atlas_short_description`}} (i386)",
-                    "version": "{{user `atlas_version`}}"
-                }
+                "access_token": "{{user `vagrantcloud_token`}}",
+                "box_tag": "{{user `vagrantcloud_username`}}/ubuntu14.04-32",
+                "version": "{{user `vagrantcloud_version`}}",
+                "no_release": "{{user `vagrantcloud_no_release`}}",
+                "version_description": "{{user `vagrantcloud_name`}} (i386)\n\nMinimal installation with guest extensions:\n- Parallels Tools {{user `parallels_tools_version`}}\n- VirtualBox Guest Additions {{user `virtualbox_additions_version`}}\n- VMware Tools {{user `vmware_tools_version`}}\n\nPackages are current as of {{isotime \"2006-01-02\"}}.\n\nhttps://github.com/wholebits/baseboxes"
             },
             {
-                "type": "atlas",
+                "type": "vagrant-cloud",
                 "only": [ "ubuntu14.04-64-libvirt" ],
-                "token": "{{user `atlas_token`}}",
-                "artifact": "{{user `atlas_username`}}/ubuntu14.04-64",
-                "artifact_type": "vagrant.box",
-                "metadata": {
-                    "description": "{{user `atlas_name`}} (amd64)\n\nMinimal installation with guest extensions:\n- Parallels Tools {{user `parallels_tools_version`}}\n- VirtualBox Guest Additions {{user `virtualbox_additions_version`}}\n- VMware Tools {{user `vmware_tools_version`}}\n\nPackages are current as of {{isotime \"2006-01-02\"}}.\n\nhttps://github.com/wholebits/baseboxes",
-                    "provider": "libvirt",
-                    "short_description": "{{user `atlas_short_description`}} (amd64)",
-                    "version": "{{user `atlas_version`}}"
-                }
+                "access_token": "{{user `vagrantcloud_token`}}",
+                "box_tag": "{{user `vagrantcloud_username`}}/ubuntu14.04-64",
+                "version": "{{user `vagrantcloud_version`}}",
+                "no_release": "{{user `vagrantcloud_no_release`}}",
+                "version_description": "{{user `vagrantcloud_name`}} (amd64)\n\nMinimal installation with guest extensions:\n- Parallels Tools {{user `parallels_tools_version`}}\n- VirtualBox Guest Additions {{user `virtualbox_additions_version`}}\n- VMware Tools {{user `vmware_tools_version`}}\n\nPackages are current as of {{isotime \"2006-01-02\"}}.\n\nhttps://github.com/wholebits/baseboxes"
             },
             {
-                "type": "atlas",
+                "type": "vagrant-cloud",
                 "only": [ "ubuntu14.04-32-parallels" ],
-                "token": "{{user `atlas_token`}}",
-                "artifact": "{{user `atlas_username`}}/ubuntu14.04-32",
-                "artifact_type": "vagrant.box",
-                "metadata": {
-                    "description": "{{user `atlas_name`}} (i386)\n\nMinimal installation with guest extensions:\n- Parallels Tools {{user `parallels_tools_version`}}\n- VirtualBox Guest Additions {{user `virtualbox_additions_version`}}\n- VMware Tools {{user `vmware_tools_version`}}\n\nPackages are current as of {{isotime \"2006-01-02\"}}.\n\nhttps://github.com/wholebits/baseboxes",
-                    "provider": "parallels",
-                    "short_description": "{{user `atlas_short_description`}} (i386)",
-                    "version": "{{user `atlas_version`}}"
-                }
+                "access_token": "{{user `vagrantcloud_token`}}",
+                "box_tag": "{{user `vagrantcloud_username`}}/ubuntu14.04-32",
+                "version": "{{user `vagrantcloud_version`}}",
+                "no_release": "{{user `vagrantcloud_no_release`}}",
+                "version_description": "{{user `vagrantcloud_name`}} (i386)\n\nMinimal installation with guest extensions:\n- Parallels Tools {{user `parallels_tools_version`}}\n- VirtualBox Guest Additions {{user `virtualbox_additions_version`}}\n- VMware Tools {{user `vmware_tools_version`}}\n\nPackages are current as of {{isotime \"2006-01-02\"}}.\n\nhttps://github.com/wholebits/baseboxes"
             },
             {
-                "type": "atlas",
+                "type": "vagrant-cloud",
                 "only": [ "ubuntu14.04-64-parallels" ],
-                "token": "{{user `atlas_token`}}",
-                "artifact": "{{user `atlas_username`}}/ubuntu14.04-64",
-                "artifact_type": "vagrant.box",
-                "metadata": {
-                    "description": "{{user `atlas_name`}} (amd64)\n\nMinimal installation with guest extensions:\n- Parallels Tools {{user `parallels_tools_version`}}\n- VirtualBox Guest Additions {{user `virtualbox_additions_version`}}\n- VMware Tools {{user `vmware_tools_version`}}\n\nPackages are current as of {{isotime \"2006-01-02\"}}.\n\nhttps://github.com/wholebits/baseboxes",
-                    "provider": "parallels",
-                    "short_description": "{{user `atlas_short_description`}} (amd64)",
-                    "version": "{{user `atlas_version`}}"
-                }
+                "access_token": "{{user `vagrantcloud_token`}}",
+                "box_tag": "{{user `vagrantcloud_username`}}/ubuntu14.04-64",
+                "version": "{{user `vagrantcloud_version`}}",
+                "no_release": "{{user `vagrantcloud_no_release`}}",
+                "version_description": "{{user `vagrantcloud_name`}} (amd64)\n\nMinimal installation with guest extensions:\n- Parallels Tools {{user `parallels_tools_version`}}\n- VirtualBox Guest Additions {{user `virtualbox_additions_version`}}\n- VMware Tools {{user `vmware_tools_version`}}\n\nPackages are current as of {{isotime \"2006-01-02\"}}.\n\nhttps://github.com/wholebits/baseboxes"
             },
             {
-                "type": "atlas",
+                "type": "vagrant-cloud",
                 "only": [ "ubuntu14.04-32-virtualbox" ],
-                "token": "{{user `atlas_token`}}",
-                "artifact": "{{user `atlas_username`}}/ubuntu14.04-32",
-                "artifact_type": "vagrant.box",
-                "metadata": {
-                    "description": "{{user `atlas_name`}} (i386)\n\nMinimal installation with guest extensions:\n- Parallels Tools {{user `parallels_tools_version`}}\n- VirtualBox Guest Additions {{user `virtualbox_additions_version`}}\n- VMware Tools {{user `vmware_tools_version`}}\n\nPackages are current as of {{isotime \"2006-01-02\"}}.\n\nhttps://github.com/wholebits/baseboxes",
-                    "provider": "virtualbox",
-                    "short_description": "{{user `atlas_short_description`}} (i386)",
-                    "version": "{{user `atlas_version`}}"
-                }
+                "access_token": "{{user `vagrantcloud_token`}}",
+                "box_tag": "{{user `vagrantcloud_username`}}/ubuntu14.04-32",
+                "version": "{{user `vagrantcloud_version`}}",
+                "no_release": "{{user `vagrantcloud_no_release`}}",
+                "version_description": "{{user `vagrantcloud_name`}} (i386)\n\nMinimal installation with guest extensions:\n- Parallels Tools {{user `parallels_tools_version`}}\n- VirtualBox Guest Additions {{user `virtualbox_additions_version`}}\n- VMware Tools {{user `vmware_tools_version`}}\n\nPackages are current as of {{isotime \"2006-01-02\"}}.\n\nhttps://github.com/wholebits/baseboxes"
             },
             {
-                "type": "atlas",
+                "type": "vagrant-cloud",
                 "only": [ "ubuntu14.04-64-virtualbox" ],
-                "token": "{{user `atlas_token`}}",
-                "artifact": "{{user `atlas_username`}}/ubuntu14.04-64",
-                "artifact_type": "vagrant.box",
-                "metadata": {
-                    "description": "{{user `atlas_name`}} (amd64)\n\nMinimal installation with guest extensions:\n- Parallels Tools {{user `parallels_tools_version`}}\n- VirtualBox Guest Additions {{user `virtualbox_additions_version`}}\n- VMware Tools {{user `vmware_tools_version`}}\n\nPackages are current as of {{isotime \"2006-01-02\"}}.\n\nhttps://github.com/wholebits/baseboxes",
-                    "provider": "virtualbox",
-                    "short_description": "{{user `atlas_short_description`}} (amd64)",
-                    "version": "{{user `atlas_version`}}"
-                }
+                "access_token": "{{user `vagrantcloud_token`}}",
+                "box_tag": "{{user `vagrantcloud_username`}}/ubuntu14.04-64",
+                "version": "{{user `vagrantcloud_version`}}",
+                "no_release": "{{user `vagrantcloud_no_release`}}",
+                "version_description": "{{user `vagrantcloud_name`}} (amd64)\n\nMinimal installation with guest extensions:\n- Parallels Tools {{user `parallels_tools_version`}}\n- VirtualBox Guest Additions {{user `virtualbox_additions_version`}}\n- VMware Tools {{user `vmware_tools_version`}}\n\nPackages are current as of {{isotime \"2006-01-02\"}}.\n\nhttps://github.com/wholebits/baseboxes"
             },
             {
-                "type": "atlas",
+                "type": "vagrant-cloud",
                 "only": [ "ubuntu14.04-32-vmware" ],
-                "token": "{{user `atlas_token`}}",
-                "artifact": "{{user `atlas_username`}}/ubuntu14.04-32",
-                "artifact_type": "vagrant.box",
-                "metadata": {
-                    "description": "{{user `atlas_name`}} (i386)\n\nMinimal installation with guest extensions:\n- Parallels Tools {{user `parallels_tools_version`}}\n- VirtualBox Guest Additions {{user `virtualbox_additions_version`}}\n- VMware Tools {{user `vmware_tools_version`}}\n\nPackages are current as of {{isotime \"2006-01-02\"}}.\n\nhttps://github.com/wholebits/baseboxes",
-                    "provider": "vmware_desktop",
-                    "short_description": "{{user `atlas_short_description`}} (i386)",
-                    "version": "{{user `atlas_version`}}"
-                }
+                "access_token": "{{user `vagrantcloud_token`}}",
+                "box_tag": "{{user `vagrantcloud_username`}}/ubuntu14.04-32",
+                "version": "{{user `vagrantcloud_version`}}",
+                "no_release": "{{user `vagrantcloud_no_release`}}",
+                "version_description": "{{user `vagrantcloud_name`}} (i386)\n\nMinimal installation with guest extensions:\n- Parallels Tools {{user `parallels_tools_version`}}\n- VirtualBox Guest Additions {{user `virtualbox_additions_version`}}\n- VMware Tools {{user `vmware_tools_version`}}\n\nPackages are current as of {{isotime \"2006-01-02\"}}.\n\nhttps://github.com/wholebits/baseboxes"
             },
             {
-                "type": "atlas",
+                "type": "vagrant-cloud",
                 "only": [ "ubuntu14.04-64-vmware" ],
-                "token": "{{user `atlas_token`}}",
-                "artifact": "{{user `atlas_username`}}/ubuntu14.04-64",
-                "artifact_type": "vagrant.box",
-                "metadata": {
-                    "description": "{{user `atlas_name`}} (amd64)\n\nMinimal installation with guest extensions:\n- Parallels Tools {{user `parallels_tools_version`}}\n- VirtualBox Guest Additions {{user `virtualbox_additions_version`}}\n- VMware Tools {{user `vmware_tools_version`}}\n\nPackages are current as of {{isotime \"2006-01-02\"}}.\n\nhttps://github.com/wholebits/baseboxes",
-                    "provider": "vmware_desktop",
-                    "short_description": "{{user `atlas_short_description`}} (amd64)",
-                    "version": "{{user `atlas_version`}}"
-                }
+                "access_token": "{{user `vagrantcloud_token`}}",
+                "box_tag": "{{user `vagrantcloud_username`}}/ubuntu14.04-64",
+                "version": "{{user `vagrantcloud_version`}}",
+                "no_release": "{{user `vagrantcloud_no_release`}}",
+                "version_description": "{{user `vagrantcloud_name`}} (amd64)\n\nMinimal installation with guest extensions:\n- Parallels Tools {{user `parallels_tools_version`}}\n- VirtualBox Guest Additions {{user `virtualbox_additions_version`}}\n- VMware Tools {{user `vmware_tools_version`}}\n\nPackages are current as of {{isotime \"2006-01-02\"}}.\n\nhttps://github.com/wholebits/baseboxes"
             }
         ]
     ]

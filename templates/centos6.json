@@ -1,16 +1,16 @@
 {
     "variables": {
-        "atlas_token": null,
-        "atlas_name": "CentOS 6.9",
-        "atlas_short_description": "CentOS 6",
-        "atlas_username": null,
-        "atlas_version": "{{isotime \"2006\"}}.{{isotime \"01\"}}.{{isotime \"02\"}}",
         "headless": "true",
         "iso_sha256sum_url_32": "http://mirrors.kernel.org/centos/6.9/isos/i386/sha256sum.txt",
         "iso_sha256sum_url_64": "http://mirrors.kernel.org/centos/6.9/isos/x86_64/sha256sum.txt",
         "iso_url_32": "http://mirrors.kernel.org/centos/6.9/isos/i386/CentOS-6.9-i386-minimal.iso",
         "iso_url_64": "http://mirrors.kernel.org/centos/6.9/isos/x86_64/CentOS-6.9-x86_64-minimal.iso",
         "parallels_tools_version": null,
+        "vagrantcloud_name": "CentOS 6.9",
+        "vagrantcloud_no_release": "true",
+        "vagrantcloud_token": null,
+        "vagrantcloud_username": null,
+        "vagrantcloud_version": "{{isotime \"2006\"}}.{{isotime \"01\"}}.{{isotime \"02\"}}",
         "virtualbox_additions_version": null,
         "vmware_tools_version": null
     },
@@ -250,108 +250,78 @@
                 }
             },
             {
-                "type": "atlas",
+                "type": "vagrant-cloud",
                 "only": [ "centos6-32-libvirt" ],
-                "token": "{{user `atlas_token`}}",
-                "artifact": "{{user `atlas_username`}}/centos6-32",
-                "artifact_type": "vagrant.box",
-                "metadata": {
-                    "description": "{{user `atlas_name`}} (i386)\n\nCore installation with guest extensions:\n- Parallels Tools {{user `parallels_tools_version`}}\n- VirtualBox Guest Additions {{user `virtualbox_additions_version`}}\n- VMware Tools {{user `vmware_tools_version`}}\n\nPackages are current as of {{isotime \"2006-01-02\"}}.\n\nhttps://github.com/wholebits/baseboxes",
-                    "provider": "libvirt",
-                    "short_description": "{{user `atlas_short_description`}} (i386)",
-                    "version": "{{user `atlas_version`}}"
-                }
+                "access_token": "{{user `vagrantcloud_token`}}",
+                "box_tag": "{{user `vagrantcloud_username`}}/centos6-32",
+                "version": "{{user `vagrantcloud_version`}}",
+                "no_release": "{{user `vagrantcloud_no_release`}}",
+                "version_description": "{{user `vagrantcloud_name`}} (i386)\n\nCore installation with guest extensions:\n- Parallels Tools {{user `parallels_tools_version`}}\n- VirtualBox Guest Additions {{user `virtualbox_additions_version`}}\n- VMware Tools {{user `vmware_tools_version`}}\n\nPackages are current as of {{isotime \"2006-01-02\"}}.\n\nhttps://github.com/wholebits/baseboxes"
             },
             {
-                "type": "atlas",
+                "type": "vagrant-cloud",
                 "only": [ "centos6-64-libvirt" ],
-                "token": "{{user `atlas_token`}}",
-                "artifact": "{{user `atlas_username`}}/centos6-64",
-                "artifact_type": "vagrant.box",
-                "metadata": {
-                    "description": "{{user `atlas_name`}} (x86_64)\n\nCore installation with guest extensions:\n- Parallels Tools {{user `parallels_tools_version`}}\n- VirtualBox Guest Additions {{user `virtualbox_additions_version`}}\n- VMware Tools {{user `vmware_tools_version`}}\n\nPackages are current as of {{isotime \"2006-01-02\"}}.\n\nhttps://github.com/wholebits/baseboxes",
-                    "provider": "libvirt",
-                    "short_description": "{{user `atlas_short_description`}} (x86_64)",
-                    "version": "{{user `atlas_version`}}"
-                }
+                "access_token": "{{user `vagrantcloud_token`}}",
+                "box_tag": "{{user `vagrantcloud_username`}}/centos6-64",
+"no_release": true,
+                "version": "{{user `vagrantcloud_version`}}",
+                "no_release": "{{user `vagrantcloud_no_release`}}",
+                "version_description": "{{user `vagrantcloud_name`}} (x86_64)\n\nCore installation with guest extensions:\n- Parallels Tools {{user `parallels_tools_version`}}\n- VirtualBox Guest Additions {{user `virtualbox_additions_version`}}\n- VMware Tools {{user `vmware_tools_version`}}\n\nPackages are current as of {{isotime \"2006-01-02\"}}.\n\nhttps://github.com/wholebits/baseboxes"
             },
             {
-                "type": "atlas",
+                "type": "vagrant-cloud",
                 "only": [ "centos6-32-parallels" ],
-                "token": "{{user `atlas_token`}}",
-                "artifact": "{{user `atlas_username`}}/centos6-32",
-                "artifact_type": "vagrant.box",
-                "metadata": {
-                    "description": "{{user `atlas_name`}} (i386)\n\nCore installation with guest extensions:\n- Parallels Tools {{user `parallels_tools_version`}}\n- VirtualBox Guest Additions {{user `virtualbox_additions_version`}}\n- VMware Tools {{user `vmware_tools_version`}}\n\nPackages are current as of {{isotime \"2006-01-02\"}}.\n\nhttps://github.com/wholebits/baseboxes",
-                    "provider": "parallels",
-                    "short_description": "{{user `atlas_short_description`}} (i386)",
-                    "version": "{{user `atlas_version`}}"
-                }
+                "access_token": "{{user `vagrantcloud_token`}}",
+                "box_tag": "{{user `vagrantcloud_username`}}/centos6-32",
+                "version": "{{user `vagrantcloud_version`}}",
+                "no_release": "{{user `vagrantcloud_no_release`}}",
+                "version_description": "{{user `vagrantcloud_name`}} (i386)\n\nCore installation with guest extensions:\n- Parallels Tools {{user `parallels_tools_version`}}\n- VirtualBox Guest Additions {{user `virtualbox_additions_version`}}\n- VMware Tools {{user `vmware_tools_version`}}\n\nPackages are current as of {{isotime \"2006-01-02\"}}.\n\nhttps://github.com/wholebits/baseboxes"
             },
             {
-                "type": "atlas",
+                "type": "vagrant-cloud",
                 "only": [ "centos6-64-parallels" ],
-                "token": "{{user `atlas_token`}}",
-                "artifact": "{{user `atlas_username`}}/centos6-64",
-                "artifact_type": "vagrant.box",
-                "metadata": {
-                    "description": "{{user `atlas_name`}} (x86_64)\n\nCore installation with guest extensions:\n- Parallels Tools {{user `parallels_tools_version`}}\n- VirtualBox Guest Additions {{user `virtualbox_additions_version`}}\n- VMware Tools {{user `vmware_tools_version`}}\n\nPackages are current as of {{isotime \"2006-01-02\"}}.\n\nhttps://github.com/wholebits/baseboxes",
-                    "provider": "parallels",
-                    "short_description": "{{user `atlas_short_description`}} (x86_64)",
-                    "version": "{{user `atlas_version`}}"
-                }
+                "access_token": "{{user `vagrantcloud_token`}}",
+                "box_tag": "{{user `vagrantcloud_username`}}/centos6-64",
+"no_release": true,
+                "version": "{{user `vagrantcloud_version`}}",
+                "no_release": "{{user `vagrantcloud_no_release`}}",
+                "version_description": "{{user `vagrantcloud_name`}} (x86_64)\n\nCore installation with guest extensions:\n- Parallels Tools {{user `parallels_tools_version`}}\n- VirtualBox Guest Additions {{user `virtualbox_additions_version`}}\n- VMware Tools {{user `vmware_tools_version`}}\n\nPackages are current as of {{isotime \"2006-01-02\"}}.\n\nhttps://github.com/wholebits/baseboxes"
             },
             {
-                "type": "atlas",
+                "type": "vagrant-cloud",
                 "only": [ "centos6-32-virtualbox" ],
-                "token": "{{user `atlas_token`}}",
-                "artifact": "{{user `atlas_username`}}/centos6-32",
-                "artifact_type": "vagrant.box",
-                "metadata": {
-                    "description": "{{user `atlas_name`}} (i386)\n\nCore installation with guest extensions:\n- Parallels Tools {{user `parallels_tools_version`}}\n- VirtualBox Guest Additions {{user `virtualbox_additions_version`}}\n- VMware Tools {{user `vmware_tools_version`}}\n\nPackages are current as of {{isotime \"2006-01-02\"}}.\n\nhttps://github.com/wholebits/baseboxes",
-                    "provider": "virtualbox",
-                    "short_description": "{{user `atlas_short_description`}} (i386)",
-                    "version": "{{user `atlas_version`}}"
-                }
+                "access_token": "{{user `vagrantcloud_token`}}",
+                "box_tag": "{{user `vagrantcloud_username`}}/centos6-32",
+                "version": "{{user `vagrantcloud_version`}}",
+                "no_release": "{{user `vagrantcloud_no_release`}}",
+                "version_description": "{{user `vagrantcloud_name`}} (i386)\n\nCore installation with guest extensions:\n- Parallels Tools {{user `parallels_tools_version`}}\n- VirtualBox Guest Additions {{user `virtualbox_additions_version`}}\n- VMware Tools {{user `vmware_tools_version`}}\n\nPackages are current as of {{isotime \"2006-01-02\"}}.\n\nhttps://github.com/wholebits/baseboxes"
             },
             {
-                "type": "atlas",
+                "type": "vagrant-cloud",
                 "only": [ "centos6-64-virtualbox" ],
-                "token": "{{user `atlas_token`}}",
-                "artifact": "{{user `atlas_username`}}/centos6-64",
-                "artifact_type": "vagrant.box",
-                "metadata": {
-                    "description": "{{user `atlas_name`}} (x86_64)\n\nCore installation with guest extensions:\n- Parallels Tools {{user `parallels_tools_version`}}\n- VirtualBox Guest Additions {{user `virtualbox_additions_version`}}\n- VMware Tools {{user `vmware_tools_version`}}\n\nPackages are current as of {{isotime \"2006-01-02\"}}.\n\nhttps://github.com/wholebits/baseboxes",
-                    "provider": "virtualbox",
-                    "short_description": "{{user `atlas_short_description`}} (x86_64)",
-                    "version": "{{user `atlas_version`}}"
-                }
+                "access_token": "{{user `vagrantcloud_token`}}",
+                "box_tag": "{{user `vagrantcloud_username`}}/centos6-64",
+                "version": "{{user `vagrantcloud_version`}}",
+                "no_release": "{{user `vagrantcloud_no_release`}}",
+                "version_description": "{{user `vagrantcloud_name`}} (x86_64)\n\nCore installation with guest extensions:\n- Parallels Tools {{user `parallels_tools_version`}}\n- VirtualBox Guest Additions {{user `virtualbox_additions_version`}}\n- VMware Tools {{user `vmware_tools_version`}}\n\nPackages are current as of {{isotime \"2006-01-02\"}}.\n\nhttps://github.com/wholebits/baseboxes"
             },
             {
-                "type": "atlas",
+                "type": "vagrant-cloud",
                 "only": [ "centos6-32-vmware" ],
-                "token": "{{user `atlas_token`}}",
-                "artifact": "{{user `atlas_username`}}/centos6-32",
-                "artifact_type": "vagrant.box",
-                "metadata": {
-                    "description": "{{user `atlas_name`}} (i386)\n\nCore installation with guest extensions:\n- Parallels Tools {{user `parallels_tools_version`}}\n- VirtualBox Guest Additions {{user `virtualbox_additions_version`}}\n- VMware Tools {{user `vmware_tools_version`}}\n\nPackages are current as of {{isotime \"2006-01-02\"}}.\n\nhttps://github.com/wholebits/baseboxes",
-                    "provider": "vmware_desktop",
-                    "short_description": "{{user `atlas_short_description`}} (i386)",
-                    "version": "{{user `atlas_version`}}"
-                }
+                "access_token": "{{user `vagrantcloud_token`}}",
+                "box_tag": "{{user `vagrantcloud_username`}}/centos6-32",
+                "version": "{{user `vagrantcloud_version`}}",
+                "no_release": "{{user `vagrantcloud_no_release`}}",
+                "version_description": "{{user `vagrantcloud_name`}} (i386)\n\nCore installation with guest extensions:\n- Parallels Tools {{user `parallels_tools_version`}}\n- VirtualBox Guest Additions {{user `virtualbox_additions_version`}}\n- VMware Tools {{user `vmware_tools_version`}}\n\nPackages are current as of {{isotime \"2006-01-02\"}}.\n\nhttps://github.com/wholebits/baseboxes"
             },
             {
-                "type": "atlas",
+                "type": "vagrant-cloud",
                 "only": [ "centos6-64-vmware" ],
-                "token": "{{user `atlas_token`}}",
-                "artifact": "{{user `atlas_username`}}/centos6-64",
-                "artifact_type": "vagrant.box",
-                "metadata": {
-                    "description": "{{user `atlas_name`}} (x86_64)\n\nCore installation with guest extensions:\n- Parallels Tools {{user `parallels_tools_version`}}\n- VirtualBox Guest Additions {{user `virtualbox_additions_version`}}\n- VMware Tools {{user `vmware_tools_version`}}\n\nPackages are current as of {{isotime \"2006-01-02\"}}.\n\nhttps://github.com/wholebits/baseboxes",
-                    "provider": "vmware_desktop",
-                    "short_description": "{{user `atlas_short_description`}} (x86_64)",
-                    "version": "{{user `atlas_version`}}"
-                }
+                "access_token": "{{user `vagrantcloud_token`}}",
+                "box_tag": "{{user `vagrantcloud_username`}}/centos6-64",
+                "version": "{{user `vagrantcloud_version`}}",
+                "no_release": "{{user `vagrantcloud_no_release`}}",
+                "version_description": "{{user `vagrantcloud_name`}} (x86_64)\n\nCore installation with guest extensions:\n- Parallels Tools {{user `parallels_tools_version`}}\n- VirtualBox Guest Additions {{user `virtualbox_additions_version`}}\n- VMware Tools {{user `vmware_tools_version`}}\n\nPackages are current as of {{isotime \"2006-01-02\"}}.\n\nhttps://github.com/wholebits/baseboxes"
             }
         ]
     ]

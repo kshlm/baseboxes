@@ -1,13 +1,13 @@
 {
     "variables": {
         "headless": "true",
-        "iso_sha256sum_url_32": "https://download.fedoraproject.org/pub/fedora/linux/releases/25/Server/i386/iso/Fedora-Server-25-1.3-i386-CHECKSUM",
-        "iso_sha256sum_url_64": "https://download.fedoraproject.org/pub/fedora/linux/releases/25/Server/x86_64/iso/Fedora-Server-25-1.3-x86_64-CHECKSUM",
-        "iso_url_32": "https://download.fedoraproject.org/pub/fedora/linux/releases/25/Server/i386/iso/Fedora-Server-netinst-i386-25-1.3.iso",
-        "iso_url_64": "https://download.fedoraproject.org/pub/fedora/linux/releases/25/Server/x86_64/iso/Fedora-Server-netinst-x86_64-25-1.3.iso",
+        "iso_sha256sum_url_32": "https://download.fedoraproject.org/pub/fedora/linux/releases/test/26_Alpha/Server/i386/iso/Fedora-Server-26-Alpha-1.7-i386-CHECKSUM",
+        "iso_sha256sum_url_64": "https://download.fedoraproject.org/pub/fedora/linux/releases/test/26_Alpha/Server/x86_64/iso/Fedora-Server-26-Alpha-1.7-x86_64-CHECKSUM",
+        "iso_url_32": "https://download.fedoraproject.org/pub/fedora/linux/releases/test/26_Alpha/Server/i386/iso/Fedora-Server-netinst-i386-26-Alpha-1.7.iso",
+        "iso_url_64": "https://download.fedoraproject.org/pub/fedora/linux/releases/test/26_Alpha/Server/x86_64/iso/Fedora-Server-netinst-x86_64-26-Alpha-1.7.iso",
         "open_vm_tools_version": null,
         "parallels_tools_version": null, 
-        "vagrantcloud_name": "Fedora 25",
+        "vagrantcloud_name": "Fedora 26 Alpha",
         "vagrantcloud_no_release": "true",
         "vagrantcloud_token": null,
         "vagrantcloud_username": null,
@@ -17,19 +17,19 @@
     "builders": [
         {
             "type": "qemu",
-            "name": "fedora25-32-libvirt",
+            "name": "fedora26-32-libvirt",
             "ssh_username": "root",
             "ssh_password": "packer",
             "ssh_timeout": "15m",
             "accelerator": "kvm",
             "boot_command": [
                 "<tab><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs>",
-                "hostname=fedora25-32 ks=http://{{.HTTPIP}}:{{.HTTPPort}}/libvirt.cfg<enter><wait>"
+                "hostname=fedora26-32 ks=http://{{.HTTPIP}}:{{.HTTPPort}}/libvirt.cfg<enter><wait>"
             ],
             "boot_wait": "5s",
             "disk_size": 49152,
             "headless": "{{user `headless`}}",
-            "http_directory": "http/fedora25",
+            "http_directory": "http/fedora26",
             "iso_checksum": "{{user `iso_sha256sum_32`}}",
             "iso_checksum_type": "sha256",
             "iso_checksum_url": "{{user `iso_sha256sum_url_32`}}",
@@ -39,23 +39,23 @@
                 [ "-m", "1024" ]
             ],
             "shutdown_command": "halt -p",
-            "vm_name": "fedora25-32"
+            "vm_name": "fedora26-32"
         },
         {
             "type": "qemu",
-            "name": "fedora25-64-libvirt",
+            "name": "fedora26-64-libvirt",
             "ssh_username": "root",
             "ssh_password": "packer",
             "ssh_timeout": "20m",
             "accelerator": "kvm",
             "boot_command": [
                 "<tab><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs>",
-                "hostname=fedora25-64 ks=http://{{.HTTPIP}}:{{.HTTPPort}}/libvirt.cfg<enter><wait>"
+                "hostname=fedora26-64 ks=http://{{.HTTPIP}}:{{.HTTPPort}}/libvirt.cfg<enter><wait>"
             ],
             "boot_wait": "5s",
             "disk_size": 49152,
             "headless": "{{user `headless`}}",
-            "http_directory": "http/fedora25",
+            "http_directory": "http/fedora26",
             "iso_checksum": "{{user `iso_sha256sum_64`}}",
             "iso_checksum_type": "sha256",
             "iso_checksum_url": "{{user `iso_sha256sum_url_64`}}",
@@ -65,23 +65,23 @@
                 [ "-m", "1024" ]
             ],
             "shutdown_command": "halt -p",
-            "vm_name": "fedora25-64"
+            "vm_name": "fedora26-64"
         },
         {
             "type": "parallels-iso",
-            "name": "fedora25-32-parallels",
+            "name": "fedora26-32-parallels",
             "ssh_username": "root",
             "ssh_password": "packer",
             "ssh_timeout": "15m",
             "boot_command": [
                 "<tab><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs>",
-                "hostname=fedora25-32 ks=http://{{.HTTPIP}}:{{.HTTPPort}}/ks.cfg<enter><wait>"
+                "hostname=fedora26-32 ks=http://{{.HTTPIP}}:{{.HTTPPort}}/ks.cfg<enter><wait>"
             ],
             "boot_wait": "5s",
             "disk_size": 49152,
             "guest_os_type": "rhel7",
             "hard_drive_interface": "sata",
-            "http_directory": "http/fedora25",
+            "http_directory": "http/fedora26",
             "iso_checksum": "{{user `iso_sha256sum_32`}}",
             "iso_checksum_type": "sha256",
             "iso_checksum_url": "{{user `iso_sha256sum_url_32`}}",
@@ -101,23 +101,23 @@
                 [ "set", "{{.Name}}", "--memsize", "512" ]
             ],
             "shutdown_command": "halt -p",
-            "vm_name": "fedora25-32"
+            "vm_name": "fedora26-32"
         },
         {
             "type": "parallels-iso",
-            "name": "fedora25-64-parallels",
+            "name": "fedora26-64-parallels",
             "ssh_username": "root",
             "ssh_password": "packer",
             "ssh_timeout": "15m",
             "boot_command": [
                 "<tab><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs>",
-                "hostname=fedora25-64 ks=http://{{.HTTPIP}}:{{.HTTPPort}}/ks.cfg<enter><wait>"
+                "hostname=fedora26-64 ks=http://{{.HTTPIP}}:{{.HTTPPort}}/ks.cfg<enter><wait>"
             ],
             "boot_wait": "5s",
             "disk_size": 49152,
             "guest_os_type": "rhel7",
             "hard_drive_interface": "sata",
-            "http_directory": "http/fedora25",
+            "http_directory": "http/fedora26",
             "iso_checksum": "{{user `iso_sha256sum_64`}}",
             "iso_checksum_type": "sha256",
             "iso_checksum_url": "{{user `iso_sha256sum_url_64`}}",
@@ -137,17 +137,17 @@
                 [ "set", "{{.Name}}", "--memsize", "512" ]
             ],
             "shutdown_command": "halt -p",
-            "vm_name": "fedora25-64"
+            "vm_name": "fedora26-64"
         },
         {
             "type": "virtualbox-iso",
-            "name": "fedora25-32-virtualbox",
+            "name": "fedora26-32-virtualbox",
             "ssh_username": "root",
             "ssh_password": "packer",
             "ssh_timeout": "15m",
             "boot_command": [
                 "<tab><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs>",
-                "hostname=fedora25-32 ks=http://{{.HTTPIP}}:{{.HTTPPort}}/ks.cfg<enter><wait>"
+                "hostname=fedora26-32 ks=http://{{.HTTPIP}}:{{.HTTPPort}}/ks.cfg<enter><wait>"
             ],
             "boot_wait": "5s",
             "disk_size": 49152,
@@ -155,7 +155,7 @@
             "guest_os_type": "Fedora",
             "hard_drive_interface": "sata",
             "headless": "{{user `headless`}}",
-            "http_directory": "http/fedora25",
+            "http_directory": "http/fedora26",
             "iso_checksum": "{{user `iso_sha256sum_32`}}",
             "iso_checksum_type": "sha256",
             "iso_checksum_url": "{{user `iso_sha256sum_url_32`}}",
@@ -172,17 +172,17 @@
                 [ "modifyhd", "output-{{build_name}}/{{.Name}}.vdi", "--compact" ],
                 [ "modifyhd", "output-{{build_name}}/{{.Name}}-1.vdi", "--compact" ]
             ],
-            "vm_name": "fedora25-32"
+            "vm_name": "fedora26-32"
         },
         {
             "type": "virtualbox-iso",
-            "name": "fedora25-64-virtualbox",
+            "name": "fedora26-64-virtualbox",
             "ssh_username": "root",
             "ssh_password": "packer",
             "ssh_timeout": "15m",
             "boot_command": [
                 "<tab><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs>",
-                "hostname=fedora25-64 ks=http://{{.HTTPIP}}:{{.HTTPPort}}/ks.cfg<enter><wait>"
+                "hostname=fedora26-64 ks=http://{{.HTTPIP}}:{{.HTTPPort}}/ks.cfg<enter><wait>"
             ],
             "boot_wait": "5s",
             "disk_size": 49152,
@@ -190,7 +190,7 @@
             "guest_os_type": "Fedora_64",
             "hard_drive_interface": "sata",
             "headless": "{{user `headless`}}",
-            "http_directory": "http/fedora25",
+            "http_directory": "http/fedora26",
             "iso_checksum": "{{user `iso_sha256sum_64`}}",
             "iso_checksum_type": "sha256",
             "iso_checksum_url": "{{user `iso_sha256sum_url_64`}}",
@@ -207,30 +207,30 @@
                 [ "modifyhd", "output-{{build_name}}/{{.Name}}.vdi", "--compact" ],
                 [ "modifyhd", "output-{{build_name}}/{{.Name}}-1.vdi", "--compact" ]
             ],
-            "vm_name": "fedora25-64"
+            "vm_name": "fedora26-64"
         },
         {
             "type": "vmware-iso",
-            "name": "fedora25-32-vmware",
+            "name": "fedora26-32-vmware",
             "ssh_username": "root",
             "ssh_password": "packer",
             "ssh_timeout": "15m",
             "boot_command": [
                 "<tab><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs>",
-                "hostname=fedora25-32 ks=http://{{.HTTPIP}}:{{.HTTPPort}}/ks.cfg<enter><wait>"
+                "hostname=fedora26-32 ks=http://{{.HTTPIP}}:{{.HTTPPort}}/ks.cfg<enter><wait>"
             ],
             "boot_wait": "5s",
             "disk_additional_size": [ 1024 ],
             "disk_size": 49152,
             "guest_os_type": "rhel7",
             "headless": "{{user `headless`}}",
-            "http_directory": "http/fedora25",
+            "http_directory": "http/fedora26",
             "iso_checksum": "{{user `iso_sha256sum_32`}}",
             "iso_checksum_type": "sha256",
             "iso_checksum_url": "{{user `iso_sha256sum_url_32`}}",
             "iso_url": "{{user `iso_url_32`}}",
             "shutdown_command": "halt -p",
-            "vm_name": "fedora25-32",
+            "vm_name": "fedora26-32",
             "vmx_data": {
                 "memsize": "1024",
                 "scsi0.virtualdev": "pvscsi"
@@ -240,30 +240,30 @@
                 "memsize": "512",
                 "ide1:0.present": "FALSE"
             },
-            "vmdk_name": "fedora25-32"
+            "vmdk_name": "fedora26-32"
         },
         {
             "type": "vmware-iso",
-            "name": "fedora25-64-vmware",
+            "name": "fedora26-64-vmware",
             "ssh_username": "root",
             "ssh_password": "packer",
             "ssh_timeout": "15m",
             "boot_command": [
                 "<tab><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs>",
-                "hostname=fedora25-64 ks=http://{{.HTTPIP}}:{{.HTTPPort}}/ks.cfg<enter><wait>"
+                "hostname=fedora26-64 ks=http://{{.HTTPIP}}:{{.HTTPPort}}/ks.cfg<enter><wait>"
             ],
             "boot_wait": "5s",
             "disk_additional_size": [ 1024 ],
             "disk_size": 49152,
             "guest_os_type": "rhel7-64",
             "headless": "{{user `headless`}}",
-            "http_directory": "http/fedora25",
+            "http_directory": "http/fedora26",
             "iso_checksum": "{{user `iso_sha256sum_64`}}",
             "iso_checksum_type": "sha256",
             "iso_checksum_url": "{{user `iso_sha256sum_url_64`}}",
             "iso_url": "{{user `iso_url_64`}}",
             "shutdown_command": "halt -p",
-            "vm_name": "fedora25-64",
+            "vm_name": "fedora26-64",
             "vmx_data": {
                 "memsize": "1024",
                 "scsi0.virtualdev": "pvscsi"
@@ -273,14 +273,14 @@
                 "ethernet0.virtualdev": "vmxnet3",
                 "ide1:0.present": "FALSE"
             },
-            "vmdk_name": "fedora25-64"
+            "vmdk_name": "fedora26-64"
         }
     ],
     "provisioners": [
         {
             "type": "shell",
             "scripts": [
-                "scripts/fedora25.sh"
+                "scripts/fedora26.sh"
             ],
             "remote_path": "/dev/shm/script.sh"
         }
@@ -299,72 +299,72 @@
             },
             {
                 "type": "vagrant-cloud",
-                "only": [ "fedora25-32-libvirt" ],
+                "only": [ "fedora26-32-libvirt" ],
                 "access_token": "{{user `vagrantcloud_token`}}",
-                "box_tag": "{{user `vagrantcloud_username`}}/fedora25-32",
+                "box_tag": "{{user `vagrantcloud_username`}}/fedora26-32",
                 "version": "{{user `vagrantcloud_version`}}",
                 "no_release": "{{user `vagrantcloud_no_release`}}",
                 "version_description": "{{user `vagrantcloud_name`}} (i386)\n\nCore installation with guest extensions:\n- Parallels Tools {{user `parallels_tools_version`}}\n- VirtualBox Guest Additions {{user `virtualbox_additions_version`}}\n- Open-VM-Tools {{user `open_vm_tools_version`}}\n\nPackages are current as of {{isotime \"2006-01-02\"}}.\n\nhttps://github.com/wholebits/baseboxes"
             },
             {
                 "type": "vagrant-cloud",
-                "only": [ "fedora25-64-libvirt" ],
+                "only": [ "fedora26-64-libvirt" ],
                 "access_token": "{{user `vagrantcloud_token`}}",
-                "box_tag": "{{user `vagrantcloud_username`}}/fedora25-64",
+                "box_tag": "{{user `vagrantcloud_username`}}/fedora26-64",
                 "version": "{{user `vagrantcloud_version`}}",
                 "no_release": "{{user `vagrantcloud_no_release`}}",
                 "version_description": "{{user `vagrantcloud_name`}} (x86_64)\n\nCore installation with guest extensions:\n- Parallels Tools {{user `parallels_tools_version`}}\n- VirtualBox Guest Additions {{user `virtualbox_additions_version`}}\n- Open-VM-Tools {{user `open_vm_tools_version`}}\n\nPackages are current as of {{isotime \"2006-01-02\"}}.\n\nhttps://github.com/wholebits/baseboxes"
             },
             {
                 "type": "vagrant-cloud",
-                "only": [ "fedora25-32-parallels" ],
+                "only": [ "fedora26-32-parallels" ],
                 "access_token": "{{user `vagrantcloud_token`}}",
-                "box_tag": "{{user `vagrantcloud_username`}}/fedora25-32",
+                "box_tag": "{{user `vagrantcloud_username`}}/fedora26-32",
                 "version": "{{user `vagrantcloud_version`}}",
                 "no_release": "{{user `vagrantcloud_no_release`}}",
                 "version_description": "{{user `vagrantcloud_name`}} (i386)\n\nCore installation with guest extensions:\n- Parallels Tools {{user `parallels_tools_version`}}\n- VirtualBox Guest Additions {{user `virtualbox_additions_version`}}\n- Open-VM-Tools {{user `open_vm_tools_version`}}\n\nPackages are current as of {{isotime \"2006-01-02\"}}.\n\nhttps://github.com/wholebits/baseboxes"
             },
             {
                 "type": "vagrant-cloud",
-                "only": [ "fedora25-64-parallels" ],
+                "only": [ "fedora26-64-parallels" ],
                 "access_token": "{{user `vagrantcloud_token`}}",
-                "box_tag": "{{user `vagrantcloud_username`}}/fedora25-64",
+                "box_tag": "{{user `vagrantcloud_username`}}/fedora26-64",
                 "version": "{{user `vagrantcloud_version`}}",
                 "no_release": "{{user `vagrantcloud_no_release`}}",
                 "version_description": "{{user `vagrantcloud_name`}} (x86_64)\n\nCore installation with guest extensions:\n- Parallels Tools {{user `parallels_tools_version`}}\n- VirtualBox Guest Additions {{user `virtualbox_additions_version`}}\n- Open-VM-Tools {{user `open_vm_tools_version`}}\n\nPackages are current as of {{isotime \"2006-01-02\"}}.\n\nhttps://github.com/wholebits/baseboxes"
             },
             {
                 "type": "vagrant-cloud",
-                "only": [ "fedora25-32-virtualbox" ],
+                "only": [ "fedora26-32-virtualbox" ],
                 "access_token": "{{user `vagrantcloud_token`}}",
-                "box_tag": "{{user `vagrantcloud_username`}}/fedora25-32",
+                "box_tag": "{{user `vagrantcloud_username`}}/fedora26-32",
                 "version": "{{user `vagrantcloud_version`}}",
                 "no_release": "{{user `vagrantcloud_no_release`}}",
                 "version_description": "{{user `vagrantcloud_name`}} (i386)\n\nCore installation with guest extensions:\n- Parallels Tools {{user `parallels_tools_version`}}\n- VirtualBox Guest Additions {{user `virtualbox_additions_version`}}\n- Open-VM-Tools {{user `open_vm_tools_version`}}\n\nPackages are current as of {{isotime \"2006-01-02\"}}.\n\nhttps://github.com/wholebits/baseboxes"
             },
             {
                 "type": "vagrant-cloud",
-                "only": [ "fedora25-64-virtualbox" ],
+                "only": [ "fedora26-64-virtualbox" ],
                 "access_token": "{{user `vagrantcloud_token`}}",
-                "box_tag": "{{user `vagrantcloud_username`}}/fedora25-64",
+                "box_tag": "{{user `vagrantcloud_username`}}/fedora26-64",
                 "version": "{{user `vagrantcloud_version`}}",
                 "no_release": "{{user `vagrantcloud_no_release`}}",
                 "version_description": "{{user `vagrantcloud_name`}} (x86_64)\n\nCore installation with guest extensions:\n- Parallels Tools {{user `parallels_tools_version`}}\n- VirtualBox Guest Additions {{user `virtualbox_additions_version`}}\n- Open-VM-Tools {{user `open_vm_tools_version`}}\n\nPackages are current as of {{isotime \"2006-01-02\"}}.\n\nhttps://github.com/wholebits/baseboxes"
             },
             {
                 "type": "vagrant-cloud",
-                "only": [ "fedora25-32-vmware" ],
+                "only": [ "fedora26-32-vmware" ],
                 "access_token": "{{user `vagrantcloud_token`}}",
-                "box_tag": "{{user `vagrantcloud_username`}}/fedora25-32",
+                "box_tag": "{{user `vagrantcloud_username`}}/fedora26-32",
                 "version": "{{user `vagrantcloud_version`}}",
                 "no_release": "{{user `vagrantcloud_no_release`}}",
                 "version_description": "{{user `vagrantcloud_name`}} (i386)\n\nCore installation with guest extensions:\n- Parallels Tools {{user `parallels_tools_version`}}\n- VirtualBox Guest Additions {{user `virtualbox_additions_version`}}\n- Open-VM-Tools {{user `open_vm_tools_version`}}\n\nPackages are current as of {{isotime \"2006-01-02\"}}.\n\nhttps://github.com/wholebits/baseboxes"
             },
             {
                 "type": "vagrant-cloud",
-                "only": [ "fedora25-64-vmware" ],
+                "only": [ "fedora26-64-vmware" ],
                 "access_token": "{{user `vagrantcloud_token`}}",
-                "box_tag": "{{user `vagrantcloud_username`}}/fedora25-64",
+                "box_tag": "{{user `vagrantcloud_username`}}/fedora26-64",
                 "version": "{{user `vagrantcloud_version`}}",
                 "no_release": "{{user `vagrantcloud_no_release`}}",
                 "version_description": "{{user `vagrantcloud_name`}} (x86_64)\n\nCore installation with guest extensions:\n- Parallels Tools {{user `parallels_tools_version`}}\n- VirtualBox Guest Additions {{user `virtualbox_additions_version`}}\n- Open-VM-Tools {{user `open_vm_tools_version`}}\n\nPackages are current as of {{isotime \"2006-01-02\"}}.\n\nhttps://github.com/wholebits/baseboxes"

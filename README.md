@@ -1,7 +1,6 @@
 # Vagrant base box templates
 
-Packer templates for building Vagrant base boxes and publishing them to the HashiCorp [Atlas box
-catalogue](https://atlas.hashicorp.com/boxes/search).
+Packer templates for building Vagrant base boxes and publishing them to [Vagrant Cloud](https://vagrantcloud.com/).
 
 ## Description
 
@@ -70,7 +69,9 @@ The following Vagrant providers are supported:
   * [VMware Fusion](http://www.vmware.com/products/fusion/), [VMware Workstation Player](https://www.vmware.com/products/player/) or
     [VMware Workstation Pro](http://www.vmware.com/products/workstation/)
 
-* [Atlas](https://atlas.hashicorp.com/) account
+* [Vagrant Cloud](https://vagrantcloud.com/) account. Note that the box "release" action can be performed during upload only once
+  for a given box version. Any repetition (i.e. when a different provider is uploaded for the same box version) will result in an
+  error. To avoid this, the box version will be released only during the libvirt provider upload.
 
 * `vars.json` file containing configuration variables as described below
 
@@ -78,23 +79,23 @@ The following Vagrant providers are supported:
 
 ### Packer Variables
 
-| Name                          | Description                                |
-| ----------------------------- | ------------------------------------------ |
-| `atlas_username`              | Atlas username or organization name        |
-| `atlas_token`                 | Atlas API token                            |
-| `open_vm_tools_version`       | String to be included in Atlas description |
-| `parallels_tools_version`     | String to be included in Atlas description |
-| `virtualbox_additions_version`| String to be included in Atlas description |
-| `vmware_tools_version`        | String to be included in Atlas description |
+| Name                          | Description                                        |
+| ----------------------------- | -------------------------------------------------- |
+| `vagrantcloud_username`       | Vagrant Cloud username or organization name        |
+| `vagrantcloud_token`          | Vagrant Cloud API token                            |
+| `open_vm_tools_version`       | String to be included in Vagrant Cloud description |
+| `parallels_tools_version`     | String to be included in Vagrant Cloud description |
+| `virtualbox_additions_version`| String to be included in Vagrant Cloud description |
+| `vmware_tools_version`        | String to be included in Vagrant Cloud description |
 
 ### Example
 
 ```json
 {
-    "atlas_token": "ABCDEFGHIJKLMN.atlasv1.OPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQRS",
-    "atlas_username": "username",
     "open_vm_tools_version": "10.1.5",
     "parallels_tools_version": "12.2.0",
+    "vagrantcloud_token": "ABCDEFGHIJKLMN.atlasv1.OPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQRS",
+    "vagrantcloud_username": "username",
     "virtualbox_additions_version": "5.1.22",
     "vmware_tools_version": "10.1.7"
 }

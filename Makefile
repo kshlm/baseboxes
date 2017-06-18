@@ -18,7 +18,7 @@ $2.box: http/$1/* scripts/$1.sh templates/$1.json vars.json
 ifneq ($(shell uname -s),Linux)
 	$(if $(findstring -libvirt,$2),cd linuxbuild && vagrant up && vagrant ssh -c 'make $(MAKEOVERRIDES) -C /vagrant $2' && vagrant halt,$(PACKER) build $(packerbuildvars) -only=$2 templates/$1.json)
 else
-	$(PACKER) build $(packerbuildvars) -only=$2 templates/$1.json
+	$(PACKER) build $(packerbuildvars) $(if $(findstring -libvirt,$2),-var vagrantcloud_no_release=false) -only=$2 templates/$1.json
 endif
 
 $(foreach provider,libvirt parallels virtualbox vmware,$(if $(findstring $(provider),$2),$(patsubst %-$(provider),%,$2): $2))

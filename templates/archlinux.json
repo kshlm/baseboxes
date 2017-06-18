@@ -1,15 +1,15 @@
 {
     "variables": {
-        "atlas_token": null,
-        "atlas_name": "Arch Linux 2017.05.01",
-        "atlas_short_description": "Arch Linux",
-        "atlas_username": null,
-        "atlas_version": "{{isotime \"2006\"}}.{{isotime \"01\"}}.{{isotime \"02\"}}",
         "headless": "true",
         "iso_sha256sum": "f01021643b98f12e6737ca11c97aabefd263fe61b809a47653633f0f1ef6e508",
         "iso_url": "http://mirrors.kernel.org/archlinux/iso/2017.05.01/archlinux-2017.05.01-x86_64.iso",
         "open_vm_tools_version": null,
         "parallels_tools_version": null,
+        "vagrantcloud_name": "Arch Linux 2017.05.01",
+        "vagrantcloud_no_release": "true",
+        "vagrantcloud_token": null,
+        "vagrantcloud_username": null,
+        "vagrantcloud_version": "{{isotime \"2006\"}}.{{isotime \"01\"}}.{{isotime \"02\"}}",
         "virtualbox_additions_version": null
     },
     "builders": [
@@ -152,56 +152,40 @@
                 }
             },
             {
-                "type": "atlas",
+                "type": "vagrant-cloud",
                 "only": [ "archlinux-libvirt" ],
-                "token": "{{user `atlas_token`}}",
-                "artifact": "{{user `atlas_username`}}/archlinux",
-                "artifact_type": "vagrant.box",
-                "metadata": {
-                    "description": "{{user `atlas_name`}} (x86_64)\n\nMinimal installation with guest extensions:\n- Parallels Tools {{user `parallels_tools_version`}}\n- VirtualBox Guest Additions {{user `virtualbox_additions_version`}}\n- Open-VM-Tools {{user `open_vm_tools_version`}}\n\nPackages are current as of {{isotime \"2006-01-02\"}}.\n\nhttps://github.com/wholebits/baseboxes",
-                    "provider": "libvirt",
-                    "short_description": "{{user `atlas_short_description`}} (x86_64)",
-                    "version": "{{user `atlas_version`}}"
-                }
+                "access_token": "{{user `vagrantcloud_token`}}",
+                "box_tag": "{{user `vagrantcloud_username`}}/archlinux",
+                "version": "{{user `vagrantcloud_version`}}",
+                "no_release": "{{user `vagrantcloud_no_release`}}",
+                "version_description": "{{user `atlas_name`}} (x86_64)\n\nMinimal installation with guest extensions:\n- Parallels Tools {{user `parallels_tools_version`}}\n- VirtualBox Guest Additions {{user `virtualbox_additions_version`}}\n- Open-VM-Tools {{user `open_vm_tools_version`}}\n\nPackages are current as of {{isotime \"2006-01-02\"}}.\n\nhttps://github.com/wholebits/baseboxes"
             },
             {
-                "type": "atlas",
+                "type": "vagrant-cloud",
                 "only": [ "archlinux-parallels" ],
-                "token": "{{user `atlas_token`}}",
-                "artifact": "{{user `atlas_username`}}/archlinux",
-                "artifact_type": "vagrant.box",
-                "metadata": {
-                    "description": "{{user `atlas_name`}} (x86_64)\n\nMinimal installation with guest extensions:\n- Parallels Tools {{user `parallels_tools_version`}}\n- VirtualBox Guest Additions {{user `virtualbox_additions_version`}}\n- Open-VM-Tools {{user `open_vm_tools_version`}}\n\nPackages are current as of {{isotime \"2006-01-02\"}}.\n\nhttps://github.com/wholebits/baseboxes",
-                    "provider": "parallels",
-                    "short_description": "{{user `atlas_short_description`}} (x86_64)",
-                    "version": "{{user `atlas_version`}}"
-                }
+                "access_token": "{{user `vagrantcloud_token`}}",
+                "box_tag": "{{user `vagrantcloud_username`}}/archlinux",
+                "version": "{{user `vagrantcloud_version`}}",
+                "no_release": "{{user `vagrantcloud_no_release`}}",
+                "version_description": "{{user `atlas_name`}} (x86_64)\n\nMinimal installation with guest extensions:\n- Parallels Tools {{user `parallels_tools_version`}}\n- VirtualBox Guest Additions {{user `virtualbox_additions_version`}}\n- Open-VM-Tools {{user `open_vm_tools_version`}}\n\nPackages are current as of {{isotime \"2006-01-02\"}}.\n\nhttps://github.com/wholebits/baseboxes"
             },
             {
-                "type": "atlas",
+                "type": "vagrant-cloud",
                 "only": [ "archlinux-virtualbox" ],
-                "token": "{{user `atlas_token`}}",
-                "artifact": "{{user `atlas_username`}}/archlinux",
-                "artifact_type": "vagrant.box",
-                "metadata": {
-                    "description": "{{user `atlas_name`}} (x86_64)\n\nMinimal installation with guest extensions:\n- Parallels Tools {{user `parallels_tools_version`}}\n- VirtualBox Guest Additions {{user `virtualbox_additions_version`}}\n- Open-VM-Tools {{user `open_vm_tools_version`}}\n\nPackages are current as of {{isotime \"2006-01-02\"}}.\n\nhttps://github.com/wholebits/baseboxes",
-                    "provider": "virtualbox",
-                    "short_description": "{{user `atlas_short_description`}} (x86_64)",
-                    "version": "{{user `atlas_version`}}"
-                }
+                "access_token": "{{user `vagrantcloud_token`}}",
+                "box_tag": "{{user `vagrantcloud_username`}}/archlinux",
+                "version": "{{user `vagrantcloud_version`}}",
+                "no_release": "{{user `vagrantcloud_no_release`}}",
+                "version_description": "{{user `atlas_name`}} (x86_64)\n\nMinimal installation with guest extensions:\n- Parallels Tools {{user `parallels_tools_version`}}\n- VirtualBox Guest Additions {{user `virtualbox_additions_version`}}\n- Open-VM-Tools {{user `open_vm_tools_version`}}\n\nPackages are current as of {{isotime \"2006-01-02\"}}.\n\nhttps://github.com/wholebits/baseboxes"
             },
             {
-                "type": "atlas",
+                "type": "vagrant-cloud",
                 "only": [ "archlinux-vmware" ],
-                "token": "{{user `atlas_token`}}",
-                "artifact": "{{user `atlas_username`}}/archlinux",
-                "artifact_type": "vagrant.box",
-                "metadata": {
-                    "description": "{{user `atlas_name`}} (x86_64)\n\nMinimal installation with guest extensions:\n- Parallels Tools {{user `parallels_tools_version`}}\n- VirtualBox Guest Additions {{user `virtualbox_additions_version`}}\n- Open-VM-Tools {{user `open_vm_tools_version`}}\n\nPackages are current as of {{isotime \"2006-01-02\"}}.\n\nhttps://github.com/wholebits/baseboxes",
-                    "provider": "vmware_desktop",
-                    "short_description": "{{user `atlas_short_description`}} (x86_64)",
-                    "version": "{{user `atlas_version`}}"
-                }
+                "access_token": "{{user `vagrantcloud_token`}}",
+                "box_tag": "{{user `vagrantcloud_username`}}/archlinux",
+                "version": "{{user `vagrantcloud_version`}}",
+                "no_release": "{{user `vagrantcloud_no_release`}}",
+                "version_description": "{{user `atlas_name`}} (x86_64)\n\nMinimal installation with guest extensions:\n- Parallels Tools {{user `parallels_tools_version`}}\n- VirtualBox Guest Additions {{user `virtualbox_additions_version`}}\n- Open-VM-Tools {{user `open_vm_tools_version`}}\n\nPackages are current as of {{isotime \"2006-01-02\"}}.\n\nhttps://github.com/wholebits/baseboxes"
             }
         ]
     ]
