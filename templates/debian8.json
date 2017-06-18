@@ -1,10 +1,10 @@
 {
     "variables": {
         "headless": "true",
-        "iso_sha256sum_url_32": "http://cdimage.debian.org/debian-cd/8.8.0/i386/iso-cd/SHA256SUMS",
-        "iso_sha256sum_url_64": "http://cdimage.debian.org/debian-cd/8.8.0/amd64/iso-cd/SHA256SUMS",
-        "iso_url_32": "http://cdimage.debian.org/debian-cd/8.8.0/i386/iso-cd/debian-8.8.0-i386-netinst.iso",
-        "iso_url_64": "http://cdimage.debian.org/debian-cd/8.8.0/amd64/iso-cd/debian-8.8.0-amd64-netinst.iso",
+        "iso_sha256sum_url_32": "http://cdimage.debian.org/cdimage/archive/8.8.0/i386/iso-cd/SHA256SUMS",
+        "iso_sha256sum_url_64": "http://cdimage.debian.org/cdimage/archive/8.8.0/amd64/iso-cd/SHA256SUMS",
+        "iso_url_32": "http://cdimage.debian.org/cdimage/archive/8.8.0/i386/iso-cd/debian-8.8.0-i386-netinst.iso",
+        "iso_url_64": "http://cdimage.debian.org/cdimage/archive/8.8.0/amd64/iso-cd/debian-8.8.0-amd64-netinst.iso",
         "parallels_tools_version": null,
         "vagrantcloud_name": "Debian 8.8 (jessie)",
         "vagrantcloud_no_release": "true",
