@@ -1,11 +1,11 @@
 {
     "variables": {
         "headless": "true",
-        "iso_sha256sum": "f01021643b98f12e6737ca11c97aabefd263fe61b809a47653633f0f1ef6e508",
-        "iso_url": "http://mirrors.kernel.org/archlinux/iso/2017.05.01/archlinux-2017.05.01-x86_64.iso",
+        "iso_sha256sum": "5cb1b7c601073efc3b421b2d25a43c50f3978b5b5af9ee1159afa0275544a160",
+        "iso_url": "http://mirrors.kernel.org/archlinux/iso/2017.07.01/archlinux-2017.07.01-x86_64.iso",
         "open_vm_tools_version": null,
         "parallels_tools_version": null,
-        "vagrantcloud_name": "Arch Linux 2017.05.01",
+        "vagrantcloud_name": "Arch Linux 2017.07.01",
         "vagrantcloud_no_release": "true",
         "vagrantcloud_token": null,
         "vagrantcloud_username": null,
