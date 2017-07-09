@@ -22,7 +22,12 @@ case $(systemd-detect-virt) in
 		;;
 esac
 
+curl -sSo /etc/pacman.d/mirrorlist 'https://www.archlinux.org/mirrorlist/?country=all&protocol=http&ip_version=4&use_mirror_status=on'
+sed -i '/^#Server = /s/^#//' /etc/pacman.d/mirrorlist
+
 pacstrap /mnt base
+
+cp /etc/pacman.d/mirrorlist /mnt/etc/pacman.d
 genfstab -p /mnt >> /mnt/etc/fstab
 hostname > /mnt/etc/hostname
 cat > /mnt/etc/systemd/network/ethernet.network <<-EOF
