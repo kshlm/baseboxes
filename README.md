@@ -37,8 +37,6 @@ All boxes are configured as follows:
 | `ubuntu14.04-64` | Ubuntu 14.04 LTS (Trusty Tahr) (amd64)      |
 | `ubuntu16.04-32` | Ubuntu 16.04 LTS (Xenial Xerus) (i386)      |
 | `ubuntu16.04-64` | Ubuntu 16.04 LTS (Xenial Xerus) (amd64)     |
-| `ubuntu16.10-32` | Ubuntu 16.10 (Yakkety Yak) (i386)           |
-| `ubuntu16.10-64` | Ubuntu 16.10 (Yakkety Yak) (amd64)          |
 | `ubuntu17.04-32` | Ubuntu 17.04 (Zesty Zapus) (i386)           |
 | `ubuntu17.04-64` | Ubuntu 17.04 (Zesty Zapus) (amd64)          |
 
