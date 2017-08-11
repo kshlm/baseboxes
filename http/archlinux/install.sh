@@ -42,7 +42,7 @@ ln -fs /run/systemd/resolve/resolv.conf /mnt/etc/resolv.conf
 arch-chroot /mnt systemctl --no-reload enable systemd-resolved.service
 arch-chroot /mnt mkinitcpio -p linux
 echo root:packer | arch-chroot /mnt chpasswd
-arch-chroot /mnt pacman -S --noconfirm grub openssh sudo
+arch-chroot /mnt pacman -S --noconfirm grub openssh sudo nfs-utils
 
 case $(systemd-detect-virt) in
 	qemu|kvm)
