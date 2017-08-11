@@ -1,4 +1,4 @@
-PACKER = packer
+PACKER ?= packer
 
 providers = libvirt parallels virtualbox vmware
 

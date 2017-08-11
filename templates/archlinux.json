@@ -18,10 +18,11 @@
             "name": "archlinux-libvirt",
             "ssh_username": "root",
             "ssh_password": "packer",
+            "ssh_wait_timeout": "1500s",
             "accelerator": "kvm",
             "boot_command": [
                 "<enter><wait10><wait10><wait10>hostname archlinux && ",
-                "curl -O http://{{.HTTPIP}}:{{.HTTPPort}}/install.sh && bash install.sh<enter>"
+                "curl -O http://{{.HTTPIP}}:{{.HTTPPort}}/install.sh && ADDR='{{.HTTPIP}}:{{.HTTPPort}}' bash install.sh<enter>"
             ],
             "boot_wait": "5s",
             "disk_size": 49152,

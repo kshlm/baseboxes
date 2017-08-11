@@ -3,7 +3,7 @@
 set -e
 
 case $(systemd-detect-virt) in
-	qemu)
+	qemu|kvm)
 		parted -s /dev/vda mklabel msdos
 		parted -s /dev/vda mkpart primary linux-swap 0% 1GiB
 		parted -s /dev/vda mkpart primary ext4 1GiB 3GiB
@@ -45,7 +45,7 @@ echo root:packer | arch-chroot /mnt chpasswd
 arch-chroot /mnt pacman -S --noconfirm grub openssh sudo
 
 case $(systemd-detect-virt) in
-	qemu)
+	qemu|kvm)
 		sfdisk -f --no-reread /dev/vda <<-EOF || true
 			2048,2095104,82,
 			2097152,,83,*
@@ -63,5 +63,16 @@ arch-chroot /mnt grub-mkconfig -o /boot/grub/grub.cfg
 sed -i.orig '$aPermitRootLogin=yes' /mnt/etc/ssh/sshd_config
 arch-chroot /mnt systemctl --no-reload enable sshd.socket
 arch-chroot /mnt pacman -Syu
+
+PACSRV_PKG="pacserve-2016-1-any.pkg.tar.xz"
+PY3_THRSRV_PKG="python3-threaded_servers-2016.10.17-3-any.pkg.tar.xz"
+mkdir -p /mnt/tmp
+curl -sSo /mnt/$PACSRV_PKG "http://$ADDR/$PACSRV_PKG"
+curl -sSo /mnt/$PY3_THRSRV_PKG "http://$ADDR/$PY3_THRSRV_PKG"
+arch-chroot /mnt pacman -U /$PACSRV_PKG /$PY3_THRSRV_PKG
+arch-chroot /mnt systemctl --no-reload enable pacserve.service
+sed -i '/^Include/iInclude = /etc/pacman.d/pacserve' /mnt/etc/pacman.conf
+sed -i '/^#Include/i#Include = /etc/pacman.d/pacserve' /mnt/etc/pacman.conf
+rm /mnt/$PACSRV_PKG /mnt/$PY3_THRSRV_PKG
 
 reboot
